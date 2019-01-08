@@ -1,0 +1,843 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>DICToolbox.image2d &mdash; DICToolbox 2.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> DICToolbox
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Documentation/Documentation.html">1. Load the data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Documentation/Documentation.html#plot-the-data">2. Plot the data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Documentation/Documentation.html#extract-macroscopic-curve">3. Extract macroscopic curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CLASS/dic.html">4. Function overview</a></li>
+</ul>
+<p class="caption"><span class="caption-text">CLASS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../CLASS/image2d.html">1. image2d</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CLASS/sTM.html">2. symetricTensorMap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CLASS/utils.html">3. utils</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">DICToolbox</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>DICToolbox.image2d</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for DICToolbox.image2d</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Created on 3 juil. 2015</span>
+
+<span class="sd">image2d is a class used to manipulate image under matrix shape and to do the analyses on the picture</span>
+
+<span class="sd">.. note:: It has been build to manipulate both aita data and dic data</span>
+<span class="sd">.. warning:: As all function are applicable to aita and dic data, please be careful of the meaning of what you are doing depending of the input data used !  </span>
+
+<span class="sd">@author: Thomas Chauve</span>
+<span class="sd">@contact: thomas.chauve@univ-grenoble-alpes.fr</span>
+<span class="sd">@license: CC-BY-CC</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="k">import</span> <span class="n">io</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="k">import</span> <span class="n">morphology</span>
+<span class="kn">import</span> <span class="nn">scipy</span>
+<span class="kn">import</span> <span class="nn">pylab</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+
+<div class="viewcode-block" id="image2d"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d">[docs]</a><span class="k">class</span> <span class="nc">image2d</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    image2d is a class for map of scalar data</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">pass</span>
+
+<div class="viewcode-block" id="image2d.__init__"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">resolution</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Constructor : field is a matrix and resolution is the step size in mm</span>
+<span class="sd">        </span>
+<span class="sd">        :param field: tabular of scalar data</span>
+<span class="sd">        :type field: array</span>
+<span class="sd">        :param resolution: step size resolution (millimeters) </span>
+<span class="sd">        :type resolution: float</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">=</span><span class="n">field</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="o">=</span><span class="n">resolution</span></div>
+        
+<div class="viewcode-block" id="image2d.plot"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.plot">[docs]</a>    <span class="k">def</span> <span class="nf">plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">NaN</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">NaN</span><span class="p">,</span><span class="n">colorbarcenter</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">colorbar</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">jet</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        plot the image2d</span>
+<span class="sd">        </span>
+<span class="sd">        :param vmin: minimum value for the colorbar</span>
+<span class="sd">        :type vmin: float</span>
+<span class="sd">        :param vmax: maximun value for the colorbar</span>
+<span class="sd">        :type vmax: float</span>
+<span class="sd">        :param colorbarcenter: do you want center the colorbar around 0</span>
+<span class="sd">        :type colorbarcenter: bool</span>
+<span class="sd">        :param colorbar: colorbar from matplotlib.cm</span>
+<span class="sd">        </span>
+<span class="sd">        .. note:: colorbar : cm.jet for eqstrain-stress</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">vmin</span><span class="p">):</span>
+            <span class="n">vmin</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>
+            
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">vmax</span><span class="p">):</span>
+            <span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>
+        
+        <span class="c1"># size of the image2d</span>
+        <span class="n">ss</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>
+        <span class="c1"># create image</span>
+        <span class="n">img</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">,</span><span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">,</span><span class="n">extent</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">ss</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">ss</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">),</span><span class="n">cmap</span><span class="o">=</span><span class="n">colorbar</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">colorbarcenter</span><span class="p">:</span>
+            <span class="n">zcolor</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">)))</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">clim</span><span class="p">(</span><span class="o">-</span><span class="n">zcolor</span><span class="p">,</span> <span class="n">zcolor</span><span class="p">)</span>
+        
+        <span class="c1"># set up colorbar</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">img</span><span class="p">,</span><span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;vertical&#39;</span><span class="p">,</span><span class="n">aspect</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span></div>
+        
+<div class="viewcode-block" id="image2d.extract_data"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.extract_data">[docs]</a>    <span class="k">def</span> <span class="nf">extract_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Extract the value at the position &#39;pos&#39; or where you clic</span>
+<span class="sd">        </span>
+<span class="sd">        :param pos: array [x,y] position of the data, if pos==[], clic to select the pixel</span>
+<span class="sd">        :type pos: array</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="n">pos</span><span class="o">==</span><span class="p">[]:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">,</span><span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">waitforbuttonpress</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;select the pixel :&#39;</span><span class="p">)</span>
+            <span class="c1">#grain wanted for the plot</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pylab</span><span class="o">.</span><span class="n">ginput</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">pos</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>    
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">[</span><span class="nb">id</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="nb">id</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span><span class="nb">id</span></div>
+    
+<div class="viewcode-block" id="image2d.triple_junction"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.triple_junction">[docs]</a>    <span class="k">def</span> <span class="nf">triple_junction</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Localized the triple junction</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">ss</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>
+        <span class="n">triple</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">pos</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">ss</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">ss</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">)):</span>
+                <span class="n">sub</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span><span class="n">j</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span>
+                <span class="nb">id</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">sub</span><span class="p">[:]</span><span class="o">==</span><span class="n">sub</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">i1</span><span class="o">=</span><span class="nb">len</span><span class="p">((</span><span class="nb">id</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">i1</span><span class="o">&lt;</span><span class="p">(</span><span class="mi">3</span><span class="p">)):</span>
+                    <span class="nb">id</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">sub</span><span class="p">[:]</span><span class="o">==</span><span class="n">sub</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="n">i2</span><span class="o">=</span><span class="nb">len</span><span class="p">((</span><span class="nb">id</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">i2</span><span class="o">&lt;</span><span class="p">(</span><span class="mi">3</span><span class="p">)):</span>
+                        <span class="nb">id</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">sub</span><span class="p">[:]</span><span class="o">==</span><span class="n">sub</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+                        <span class="n">i3</span><span class="o">=</span><span class="nb">len</span><span class="p">((</span><span class="nb">id</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+                        <span class="k">if</span> <span class="p">((</span><span class="n">i3</span><span class="o">==</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">i2</span><span class="o">==</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">i1</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">i3</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">):</span>
+                            <span class="n">triple</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sub</span><span class="p">)</span>
+                            <span class="n">pos</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">])</span>
+                            
+        <span class="n">c</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+        <span class="n">z</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]))</span>                    
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">c</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">c</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;+&#39;</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">c</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]):</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+            <span class="n">label</span><span class="p">,</span> 
+            <span class="n">xy</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">xytext</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span>
+            <span class="n">textcoords</span> <span class="o">=</span> <span class="s1">&#39;offset points&#39;</span><span class="p">,</span> <span class="n">ha</span> <span class="o">=</span> <span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">va</span> <span class="o">=</span> <span class="s1">&#39;bottom&#39;</span><span class="p">,</span>
+            <span class="n">bbox</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">boxstyle</span> <span class="o">=</span> <span class="s1">&#39;round,pad=0.5&#39;</span><span class="p">,</span> <span class="n">fc</span> <span class="o">=</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">),</span>
+            <span class="n">arrowprops</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span> <span class="o">=</span> <span class="s1">&#39;-&gt;&#39;</span><span class="p">,</span> <span class="n">connectionstyle</span> <span class="o">=</span> <span class="s1">&#39;arc3,rad=0&#39;</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">triple</span><span class="p">,</span><span class="n">c</span></div>
+    
+<div class="viewcode-block" id="image2d.imresize"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.imresize">[docs]</a>    <span class="k">def</span> <span class="nf">imresize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">res</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Resize the image with nearest interpolation to have a pixel of the length given in res</span>
+<span class="sd">        </span>
+<span class="sd">        :param res: new resolution map wanted (millimeters)</span>
+<span class="sd">        :type res: float</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Fraction of current size</span>
+        <span class="n">zoom</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="o">/</span><span class="n">res</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="o">=</span><span class="n">res</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">=</span><span class="n">scipy</span><span class="o">.</span><span class="n">ndimage</span><span class="o">.</span><span class="n">interpolation</span><span class="o">.</span><span class="n">zoom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">,</span><span class="n">zoom</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span></div>
+        
+<div class="viewcode-block" id="image2d.diff"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.diff">[docs]</a>    <span class="k">def</span> <span class="nf">diff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">axis</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Derive the image along the axis define</span>
+<span class="sd">        </span>
+<span class="sd">        :param axis: &#39;x&#39; to do du/dx or &#39;y&#39; to do du/dy</span>
+<span class="sd">        :type axis: str</span>
+<span class="sd">        :return: differential of the map in respect to the &#39;axis&#39; wanted</span>
+<span class="sd">        :rtype: image2d</span>
+<span class="sd">        </span>
+<span class="sd">        .. warning:: &#39;x&#39; axis is left to right and &#39;y&#39; is bottom to top direction        </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">axis</span><span class="o">==</span><span class="s1">&#39;x&#39;</span><span class="p">):</span>
+            <span class="n">dfield</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span>
+            <span class="n">nfield</span><span class="o">=</span><span class="n">dfield</span><span class="p">[</span><span class="mi">1</span><span class="p">:,:]</span> <span class="c1"># remove one line along y direction to have same size for both diff</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">axis</span><span class="o">==</span><span class="s1">&#39;y&#39;</span><span class="p">):</span>
+            <span class="n">dfield</span><span class="o">=-</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span> <span class="c1"># the - is from the convention y axis from bottom to top</span>
+            <span class="n">nfield</span><span class="o">=</span><span class="n">dfield</span><span class="p">[:,</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;axis not good&#39;</span><span class="p">)</span>
+            
+        <span class="n">dmap</span><span class="o">=</span><span class="n">image2d</span><span class="p">(</span><span class="n">nfield</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">dmap</span></div>
+    
+<div class="viewcode-block" id="image2d.__add__"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.__add__">[docs]</a>    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Sum of 2 maps</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">is</span> <span class="n">image2d</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">image2d</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">+</span><span class="n">other</span><span class="o">.</span><span class="n">field</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">image2d</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">+</span><span class="n">other</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">)</span></div>
+            
+<div class="viewcode-block" id="image2d.__sub__"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.__sub__">[docs]</a>    <span class="k">def</span> <span class="nf">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Subtract of 2 maps</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">is</span> <span class="n">image2d</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">image2d</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">-</span><span class="n">other</span><span class="o">.</span><span class="n">field</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">image2d</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">-</span><span class="n">other</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="image2d.__mul__"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.__mul__">[docs]</a>    <span class="k">def</span> <span class="nf">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Multiply case by case</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">is</span> <span class="n">image2d</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">image2d</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">*</span><span class="n">other</span><span class="o">.</span><span class="n">field</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">is</span> <span class="n">mask2d</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">image2d</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">*</span><span class="n">other</span><span class="o">.</span><span class="n">field</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">image2d</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">*</span><span class="n">other</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">)</span></div>
+        
+    
+<div class="viewcode-block" id="image2d.__div__"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.__div__">[docs]</a>    <span class="k">def</span> <span class="nf">__div__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+        <span class="s1">&#39;Divide self by other case by case&#39;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">is</span> <span class="n">image2d</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">image2d</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">*</span><span class="mi">1</span><span class="o">/</span><span class="n">other</span><span class="o">.</span><span class="n">field</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">*</span><span class="mi">1</span><span class="o">/</span><span class="n">other</span></div>
+    
+<div class="viewcode-block" id="image2d.pow"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.pow">[docs]</a>    <span class="k">def</span> <span class="nf">pow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nb</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        map power nb</span>
+<span class="sd">        </span>
+<span class="sd">        :param nb:</span>
+<span class="sd">        :type nb: float    </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="n">image2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">,</span><span class="n">nb</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">)</span></div>
+        
+<div class="viewcode-block" id="image2d.mask_build"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.mask_build">[docs]</a>    <span class="k">def</span> <span class="nf">mask_build</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">polygone</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">grainId</span><span class="o">=</span><span class="p">[],</span><span class="n">pos_center</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Create a mask map with NaN value where you don&#39;t want data and one were you want</span>
+<span class="sd">        The default mask is a circle of center you choose and radius you define. </span>
+<span class="sd">        </span>
+<span class="sd">        :param polygone: make a polygone mask (&#39;not yet implemented&#39;)</span>
+<span class="sd">        :type polygone: bool</span>
+<span class="sd">        :param r: radius of the circle (warning what is the dimention of r mm ?)</span>
+<span class="sd">        :type r: float</span>
+<span class="sd">        :param grainId: You select the grainId you want in an array</span>
+<span class="sd">        :type: array</span>
+<span class="sd">        :return: mask</span>
+<span class="sd">        :rtype: image2d</span>
+<span class="sd">        :return: vec (vector of grainId is selction by grain or pos_center if selection by circle or 0 if polygone )</span>
+<span class="sd">        :rtype: array</span>
+<span class="sd">        </span>
+<span class="sd">        .. note:: if you want applied a mask one your data just do data*mask where data is an image2d object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># size of the figure</span>
+        <span class="n">ss</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>
+        <span class="n">mask_map</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">ss</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
+        <span class="n">mask_map</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+        
+        <span class="c1"># option 1 : draw polygone</span>
+        <span class="k">if</span> <span class="n">polygone</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;not yet implemented&#39;</span><span class="p">)</span>           
+            <span class="n">xp</span><span class="o">=</span><span class="mi">0</span>
+                    
+        <span class="c1"># option 2 : you want are circle</span>
+        <span class="k">elif</span> <span class="n">r</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">pos_center</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">waitforbuttonpress</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;clic to the center of the circle&#39;</span><span class="p">)</span>
+                <span class="n">xp</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">ginput</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">xp</span><span class="o">=</span><span class="n">pos_center</span>
+            
+            <span class="n">idx</span><span class="o">=</span><span class="p">[]</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">r</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">xp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">r</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">r</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">xp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">r</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="p">(((</span><span class="n">i</span><span class="o">-</span><span class="n">xp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="n">xp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span><span class="o">&lt;</span><span class="n">r</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">):</span>
+                        <span class="n">idx</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">])</span>
+            <span class="n">idx2</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+            <span class="n">y</span><span class="o">=</span><span class="n">ss</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">idx2</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">idx2</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">v</span><span class="o">=</span><span class="p">(</span><span class="n">y</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">y</span><span class="o">&lt;</span><span class="n">ss</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;</span><span class="n">ss</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">mask_map</span><span class="p">[[</span><span class="n">y</span><span class="p">[</span><span class="n">v</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="n">v</span><span class="p">]]]</span><span class="o">=</span><span class="mi">1</span>
+            
+            
+            <span class="n">pc</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">v</span><span class="p">))</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">pc</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;WARNING : area is close to the border only &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">pc</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="si">% o</span><span class="s1">f the initial area as been selected&#39;</span><span class="p">)</span>
+            
+        <span class="c1"># option 3 : grainId    </span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">grainId</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span>    
+                <span class="n">gId</span><span class="o">=</span><span class="n">grainId</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">,</span><span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">waitforbuttonpress</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Select grains :&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;midle mouse clic when you are finish&#39;</span><span class="p">)</span>
+                <span class="n">xp</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">ginput</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+                <span class="n">gId</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">[</span><span class="n">xp</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">xp</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]]</span>
+            
+            <span class="n">xp</span><span class="o">=</span><span class="n">gId</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gId</span><span class="p">)):</span>
+                <span class="n">idx</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">==</span><span class="n">gId</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">mask_map</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+        
+        <span class="k">return</span> <span class="n">mask2d</span><span class="p">(</span><span class="n">mask_map</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">),</span><span class="n">xp</span></div>
+    
+    
+<div class="viewcode-block" id="image2d.skeleton"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.skeleton">[docs]</a>    <span class="k">def</span> <span class="nf">skeleton</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Skeletonized a label map build by grain_label</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="kn">import</span> <span class="nn">micro2d</span>
+        <span class="c1"># derived the image </span>
+        <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+        <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+        <span class="c1"># Normelized to one</span>
+        <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="o">/</span><span class="n">a</span>
+        <span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="o">/</span><span class="n">b</span>
+        <span class="c1"># Replace NaN by 0</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">field</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">field</span><span class="p">)]</span><span class="o">=</span><span class="mi">0</span>
+        <span class="n">b</span><span class="o">.</span><span class="n">field</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">field</span><span class="p">)]</span><span class="o">=</span><span class="mi">0</span>
+        <span class="c1"># Build the skeleton</span>
+        <span class="n">skel</span><span class="o">=</span><span class="n">a</span><span class="o">+</span><span class="n">b</span>
+        <span class="nb">id</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">skel</span><span class="o">.</span><span class="n">field</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">skel</span><span class="o">.</span><span class="n">field</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+        
+        <span class="k">return</span> <span class="n">micro2d</span><span class="p">(</span><span class="n">skel</span><span class="o">.</span><span class="n">field</span><span class="p">,</span><span class="n">skel</span><span class="o">.</span><span class="n">res</span><span class="p">)</span></div>
+        
+<div class="viewcode-block" id="image2d.vtk_export"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.vtk_export">[docs]</a>    <span class="k">def</span> <span class="nf">vtk_export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nameId</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Export the image2d into vtk file</span>
+<span class="sd">            :param nameId: name of the output file</span>
+<span class="sd">            :type name: str</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="c1"># size of the map</span>
+        <span class="n">ss</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>
+        <span class="c1"># open micro.vtk file</span>
+        <span class="n">micro_out</span><span class="o">=</span><span class="nb">open</span><span class="p">(</span><span class="n">nameId</span><span class="o">+</span><span class="s1">&#39;.vtk&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+        <span class="c1"># write the header of the file</span>
+        <span class="n">micro_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;# vtk DataFile Version 3.0 &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">())</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">micro_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;craft output </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">micro_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;ASCII </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">micro_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;DATASET STRUCTURED_POINTS </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">micro_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;DIMENSIONS &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ss</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ss</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span>  <span class="s1">&#39; 1</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">micro_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;ORIGIN 0.000000 0.000000 0.000000 </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">micro_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;SPACING &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; 1.000000 </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">micro_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;POINT_DATA &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ss</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">ss</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">micro_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;SCALARS scalars float </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">micro_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;LOOKUP_TABLE default </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">ss</span><span class="p">[</span><span class="mi">0</span><span class="p">]))[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">ss</span><span class="p">[</span><span class="mi">1</span><span class="p">])):</span>
+                <span class="n">micro_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]))</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="n">micro_out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        
+                
+        <span class="n">micro_out</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        
+        <span class="k">return</span> <span class="s2">&quot;vtk file created&quot;</span></div>
+    
+<div class="viewcode-block" id="image2d.auto_correlation"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.auto_correlation">[docs]</a>    <span class="k">def</span> <span class="nf">auto_correlation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">pad</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Compute the auto-correlation function from Dumoulin 2003</span>
+<span class="sd">        </span>
+<span class="sd">        :param pad: padding with mean data (default 1)</span>
+<span class="sd">        :type pad: int</span>
+<span class="sd">        </span>
+<span class="sd">        :return: res_auto which the auto correlation function</span>
+<span class="sd">        :rtype: image2d</span>
+<span class="sd">        :return: Cinf see equation 6 Doumalin 2003</span>
+<span class="sd">        :rtype: float</span>
+<span class="sd">        :return: profil, it correspond to 180 profile taken for along line with direction between 0 and 180°. The profil[i,:] correspond to a line making an angle of i degree from x direction.</span>
+<span class="sd">        :rtype: np.array 180*length profile</span>
+<span class="sd">        :return: xi, it correspond to the distance along the profile for the variable profile</span>
+<span class="sd">        :rtype: np.array 180*length profile</span>
+<span class="sd">        :return: cross, it correspond to the length of the autocorrelation radius</span>
+<span class="sd">        :rtype: np.array dim=180</span>
+<span class="sd">	:return: data, it correspond to the true image use for the correlation</span>
+<span class="sd">        :rtype: image2d</span>
+<span class="sd">        :Exemple:</span>
+<span class="sd">            &gt;&gt;&gt; # Using a fake image</span>
+<span class="sd">            &gt;&gt;&gt; data=image2d.image2d(np.eye(200),1)</span>
+<span class="sd">            &gt;&gt;&gt; [res_auto,Cinf,profil,xi,cross,image]=data.auto_correlation(pad=2)</span>
+<span class="sd">            &gt;&gt;&gt; # plot the auto correlation function</span>
+<span class="sd">            &gt;&gt;&gt; res_auto.plot()</span>
+<span class="sd">            &gt;&gt;&gt;plt.show()</span>
+<span class="sd">            &gt;&gt;&gt; # plot the auto_correlation radius in function of the angle of the profile</span>
+<span class="sd">            &gt;&gt;&gt; plt.plot(cross)</span>
+<span class="sd">            &gt;&gt;&gt; plt.xlabel(&#39;angle degree&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; plt.ylabel(&#39;auto correlation radius (mm)&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; plt.show()</span>
+<span class="sd">            &gt;&gt;&gt; # extract the max and min auto correlation radius</span>
+<span class="sd">            &gt;&gt;&gt; id=np.where(cross==np.min(cross))</span>
+<span class="sd">            &gt;&gt;&gt; minC=id[0][0]</span>
+<span class="sd">            &gt;&gt;&gt; id=np.where(cross==np.max(cross))</span>
+<span class="sd">            &gt;&gt;&gt; maxC=id[0][0]</span>
+<span class="sd">            &gt;&gt;&gt; ss=np.shape(xi) </span>
+<span class="sd">            &gt;&gt;&gt; CC=np.ones(ss[1])*Cinf</span>
+<span class="sd">            &gt;&gt;&gt; plt.figure()</span>
+<span class="sd">            &gt;&gt;&gt; plt.plot(xi[0,:],CC)</span>
+<span class="sd">            &gt;&gt;&gt; plt.hold(&#39;on&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; plt.plot(xi[minC,:],profil[minC,:])</span>
+<span class="sd">            &gt;&gt;&gt; plt.plot(xi[maxC,:],profil[maxC,:])</span>
+<span class="sd">            &gt;&gt;&gt; plt.show()</span>
+<span class="sd">            </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># build a square picture nm*nm</span>
+        <span class="n">nm</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">))</span>
+        <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">nm</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="n">nm</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c1"># mean of the data field</span>
+        <span class="n">mean_data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="c1"># if there is nan value in data you need to replace them the choise now is to replace them by the mean value but may be interpolation can be better.</span>
+        <span class="nb">id</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span><span class="o">=</span><span class="n">mean_data</span>
+        <span class="c1">#</span>
+        <span class="n">fpad</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="n">pad</span><span class="o">*</span><span class="n">nm</span><span class="p">,</span><span class="n">pad</span><span class="o">*</span><span class="n">nm</span><span class="p">])</span><span class="o">*</span><span class="n">mean_data</span>
+        <span class="n">fpad</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">nm</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="n">nm</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">data</span>
+        <span class="c1">##</span>
+        <span class="n">FFT_fpad</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft2</span><span class="p">(</span><span class="n">fpad</span><span class="p">)</span>
+        <span class="n">abs_FFTpad</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">FFT_fpad</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">An</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft2</span><span class="p">(</span><span class="n">abs_FFTpad</span><span class="p">)</span>
+        <span class="n">mAn</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">An</span><span class="p">)</span>
+        
+        <span class="n">Autocor</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">An</span><span class="o">/</span><span class="n">mAn</span><span class="p">));</span>
+        <span class="n">Cinf</span><span class="o">=</span><span class="n">mean_data</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">fpad</span><span class="o">**</span><span class="mi">2</span><span class="p">);</span>
+        <span class="n">res_auto</span><span class="o">=</span><span class="n">image2d</span><span class="p">(</span><span class="n">Autocor</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        
+        
+        <span class="c1"># etract min an max direction</span>
+        <span class="n">ss</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">res_auto</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>
+        <span class="n">x0</span><span class="o">=</span><span class="n">ss</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span>
+        <span class="n">y0</span><span class="o">=</span><span class="n">x0</span>
+        <span class="n">cross</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">180</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">180</span><span class="p">)):</span>
+            <span class="n">xt</span><span class="o">=</span><span class="n">x0</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mf">180.</span><span class="p">)</span><span class="o">*</span><span class="n">x0</span>
+            <span class="n">yt</span><span class="o">=</span><span class="n">y0</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mf">180.</span><span class="p">)</span><span class="o">*</span><span class="n">y0</span>
+            <span class="n">pos</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">],[</span><span class="n">xt</span><span class="p">,</span><span class="n">yt</span><span class="p">]])</span>
+            <span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">out</span><span class="p">,</span><span class="n">pos</span><span class="p">]</span><span class="o">=</span><span class="n">res_auto</span><span class="o">.</span><span class="n">extract_profil</span><span class="p">(</span><span class="n">pos</span><span class="o">=</span><span class="n">pos</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">l</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+                <span class="n">profil</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">180</span><span class="p">,</span><span class="n">l</span><span class="p">])</span>
+                <span class="n">xi</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">180</span><span class="p">,</span><span class="n">l</span><span class="p">])</span>
+            <span class="n">profil</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span><span class="o">=</span><span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">l</span><span class="p">]</span>
+            <span class="n">xi</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span><span class="o">=</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">l</span><span class="p">]</span>
+            <span class="c1">#</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">profil</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span><span class="o">-</span><span class="n">Cinf</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">cross</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">cross</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="nb">id</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            
+        <span class="k">return</span> <span class="n">res_auto</span><span class="p">,</span><span class="n">Cinf</span><span class="p">,</span><span class="n">profil</span><span class="p">,</span><span class="n">xi</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">,</span><span class="n">cross</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">,</span><span class="n">image2d</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="image2d.extract_profil"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.extract_profil">[docs]</a>    <span class="k">def</span> <span class="nf">extract_profil</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Extract data along a given profile</span>
+<span class="sd">        </span>
+<span class="sd">        :param pos: correspond to the position of the line np.array([[X0,Y0],[X1,Y1]])</span>
+<span class="sd">        :type pos: np.array dim 2*2</span>
+<span class="sd">        :return: x</span>
+<span class="sd">        :rtype: postion along the profile</span>
+<span class="sd">        :return: out</span>
+<span class="sd">        :rtype: value along the profile</span>
+<span class="sd">        :return: pos</span>
+<span class="sd">        :rtype: starting and ending points</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="c1"># size of the map</span>
+        <span class="n">ss</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>
+        <span class="c1"># plot the data with phi1 value</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">h</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+            <span class="c1"># select initial and final points for the line</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Select initial and final points for the line :&#39;</span><span class="p">)</span>
+            <span class="n">pos</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pylab</span><span class="o">.</span><span class="n">ginput</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+        
+        <span class="n">yy</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">([</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]])</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span>
+        <span class="n">xx</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">([</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]])</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span>
+        
+        <span class="c1"># numbers of pixel along the line</span>
+        <span class="n">nb_pixel</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">xx</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">xx</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="n">yy</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">yy</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+        
+        <span class="c1"># calcul for each pixel</span>
+        <span class="n">out</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">x</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">xi</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">yi</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">nb_pixel</span><span class="p">)):</span>
+            <span class="c1"># find the coordinate x an y along the line</span>
+            <span class="n">xi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ss</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="p">(</span><span class="n">xx</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">xx</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">nb_pixel</span><span class="o">+</span><span class="n">xx</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+            <span class="n">yi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="p">(</span><span class="n">yy</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">yy</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">nb_pixel</span><span class="o">+</span><span class="n">yy</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+            <span class="c1"># extract phi and phi1</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">[</span><span class="n">xi</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">yi</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">xi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">xi</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="n">yi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">yi</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+            
+        <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">pos</span></div></div>
+        
+        
+        
+<span class="c1">###########################################</span>
+<span class="c1">################# mask2d ##################</span>
+<span class="c1">###########################################        </span>
+        
+        
+<div class="viewcode-block" id="mask2d"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.mask2d">[docs]</a><span class="k">class</span> <span class="nc">mask2d</span><span class="p">(</span><span class="n">image2d</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    mask2d is a class which herit from image2d but it is restricted to microstructure object (background NaN, selected area 1)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">pass</span>
+
+<div class="viewcode-block" id="mask2d.__init__"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.mask2d.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">field</span><span class="p">,</span> <span class="n">resolution</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Constructor : field is a matrix and resolution is the step size in mm</span>
+<span class="sd">        </span>
+<span class="sd">        :param field: tabular of scalar data</span>
+<span class="sd">        :type field: array</span>
+<span class="sd">        :param resolution: step size resolution (millimeters) </span>
+<span class="sd">        :type resolution: float</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">field</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">field</span><span class="o">!=</span><span class="mi">1</span><span class="p">)))</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">=</span><span class="n">field</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="o">=</span><span class="n">resolution</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;error not only NaN and 1 in field&#39;</span><span class="p">)</span>         
+        <span class="k">return</span></div>
+    
+
+<div class="viewcode-block" id="mask2d.load_mask"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.mask2d.load_mask">[docs]</a>    <span class="k">def</span> <span class="nf">load_mask</span><span class="p">(</span><span class="n">adr_bmp</span><span class="p">,</span><span class="n">res</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Create a mask from a black and white bmp image where whith correspond to the selected area</span>
+
+<span class="sd">        :param adr_bmp: path of the mask bmp file</span>
+<span class="sd">        :type adr_bmp: str</span>
+<span class="sd">        :param res: resolution of the picture mm (default 1)</span>
+<span class="sd">        :type res: float</span>
+<span class="sd">        :return mask:</span>
+<span class="sd">        :rtype mask: mask2d </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># Load bmp file</span>
+        <span class="n">image_bmp</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">adr_bmp</span><span class="p">)</span>
+
+        <span class="n">tmp</span><span class="o">=</span><span class="n">image_bmp</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># create nan matrix</span>
+        <span class="n">ss</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+        <span class="n">mask</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">ss</span><span class="p">)</span>
+        <span class="n">mask</span><span class="p">[:]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">NaN</span>
+        <span class="c1"># replace by one the white area</span>
+        <span class="nb">id</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">tmp</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">mask</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">mask2d</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span><span class="n">res</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="mask2d.complementary"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.mask2d.complementary">[docs]</a>    <span class="k">def</span> <span class="nf">complementary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Return complementary mask</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">m</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">))</span>
+        <span class="n">m</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">==</span><span class="mi">1</span><span class="p">)]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">NaN</span>
+
+        <span class="k">return</span> <span class="n">mask2d</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">)</span></div></div>
+
+<span class="c1">###########################################</span>
+<span class="c1">################# micro2d ##################</span>
+<span class="c1">###########################################    </span>
+
+<div class="viewcode-block" id="micro2d"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.micro2d">[docs]</a><span class="k">class</span> <span class="nc">micro2d</span><span class="p">(</span><span class="n">image2d</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    micro2d is a class which herit from image2d but it is restricted to microstructure object (background 0, boundary 1)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">pass</span>
+
+<div class="viewcode-block" id="micro2d.__init__"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.micro2d.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">field</span><span class="p">,</span> <span class="n">resolution</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Constructor : field is a matrix and resolution is the step size in mm</span>
+<span class="sd">        </span>
+<span class="sd">        :param field: tabular of scalar data</span>
+<span class="sd">        :type field: array</span>
+<span class="sd">        :param resolution: step size resolution (millimeters) </span>
+<span class="sd">        :type resolution: float</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">field</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">field</span><span class="o">!=</span><span class="mi">1</span><span class="p">)))</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">=</span><span class="n">field</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="o">=</span><span class="n">resolution</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;error not only 0 and 1 in field&#39;</span><span class="p">)</span>         
+        <span class="k">return</span></div>
+    
+    
+<div class="viewcode-block" id="micro2d.grain_label"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.micro2d.grain_label">[docs]</a>    <span class="k">def</span> <span class="nf">grain_label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Label area in a black and white picture</span>
+<span class="sd">        </span>
+<span class="sd">        .. note:: black color for the background and white color for the boundary</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># function which label a microstructure skeleton in one number per grain</span>
+        <span class="n">new_img</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span>
+        <span class="n">res</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span>
+        <span class="n">new_grain</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">new_img</span><span class="p">,</span> <span class="n">neighbors</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">grains</span><span class="o">=</span><span class="n">image2d</span><span class="p">(</span><span class="n">new_grain</span><span class="p">,</span><span class="n">res</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">grains</span></div>
+    
+<div class="viewcode-block" id="micro2d.plotBoundary"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.micro2d.plotBoundary">[docs]</a>    <span class="k">def</span> <span class="nf">plotBoundary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dilatation</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Add boundary to the figure</span>
+<span class="sd">        </span>
+<span class="sd">        :param dilatation: number of iteration for the dilation of 1 value - used this to make larger the boundaries (default 2)</span>
+<span class="sd">        :type dilatation: int</span>
+<span class="sd">        :Exemple:</span>
+<span class="sd">            &gt;&gt;&gt; data.phi1.plot()</span>
+<span class="sd">            &gt;&gt;&gt; data.micro.plotBoundary(dilatation=10)</span>
+<span class="sd">            &gt;&gt;&gt; plt.show()</span>
+<span class="sd">        </span>
+<span class="sd">        .. note:: plot only the value of the pixel equal at 1</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="c1"># extract microstructure matrix</span>
+        <span class="n">micro</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span>
+        <span class="c1"># make the dilation the number of time wanted</span>
+        <span class="k">if</span> <span class="n">dilatation</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">micro</span><span class="o">=</span><span class="n">scipy</span><span class="o">.</span><span class="n">ndimage</span><span class="o">.</span><span class="n">binary_dilation</span><span class="p">(</span><span class="n">micro</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="n">dilatation</span><span class="p">)</span>
+        <span class="c1"># create a mask with the 0 value</span>
+        <span class="n">micro</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">micro</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">micro</span><span class="p">)</span>
+        <span class="c1"># size of the image2d</span>
+        <span class="n">ss</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>    
+        <span class="c1"># plot the boundaries</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">micro</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">ss</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">ss</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">),</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">gist_gray</span><span class="p">)</span>
+        
+        <span class="k">return</span></div>
+    
+<div class="viewcode-block" id="micro2d.area"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.micro2d.area">[docs]</a>    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Compute the grain area for each grain</span>
+<span class="sd">        </span>
+<span class="sd">        :return: g_arean array of scalar of grain area in mm^2</span>
+<span class="sd">        :rtype: g_area np.array</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        
+        <span class="n">g_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">grain_label</span><span class="p">()</span>
+        
+        <span class="n">g_area</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">g_map</span><span class="o">.</span><span class="n">field</span><span class="p">))</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">g_area</span><span class="p">))):</span>
+            <span class="n">g_area</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">g_map</span><span class="o">.</span><span class="n">field</span><span class="o">==</span><span class="n">i</span><span class="p">))</span><span class="o">*</span><span class="n">g_map</span><span class="o">.</span><span class="n">res</span><span class="o">**</span><span class="mf">2.</span>
+            
+        <span class="k">return</span> <span class="n">g_area</span></div></div>
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright CC-BY-CC
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+  
+
+  <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
