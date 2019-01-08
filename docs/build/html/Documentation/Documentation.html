@@ -93,7 +93,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#componante-of-strain-tensor">2.2. Componante of strain tensor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#solid-rotation">2.3. Solid rotation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#equivalent-strain">2.4. Equivalent strain</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#plot-principal-direction-of-the-strain-tensor">2.5. Plot principal direction of the strain tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#add-microstructure-on-figure">2.5. Add microstructure on figure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plot-principal-direction-of-the-strain-tensor">2.6. Plot principal direction of the strain tensor</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="#extract-macroscopic-curve">3. Extract macroscopic curve</a></li>
@@ -285,9 +286,9 @@ Text(0.5, 1.0, '$\omega_{xy}$')
 </pre></div>
 </div>
 <img alt="../_images/output_15_1.png" src="../_images/output_15_1.png" />
-<div class="code ipython3 highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## Add microstructure on figure</span>
-</pre></div>
 </div>
+<div class="section" id="add-microstructure-on-figure">
+<h2>2.5. Add microstructure on figure<a class="headerlink" href="#add-microstructure-on-figure" title="Permalink to this headline">¶</a></h2>
 <div class="code ipython3 highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">data</span><span class="o">.</span><span class="n">strain</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">eqVonMises</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">colorbar</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">plasma</span><span class="p">)</span>
 <span class="n">data</span><span class="o">.</span><span class="n">micro</span><span class="o">.</span><span class="n">plotBoundary</span><span class="p">(</span><span class="n">dilatation</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -300,7 +301,7 @@ Text(0.5, 1.0, '$\omega_{xy}$')
 <img alt="../_images/output_17_1.png" src="../_images/output_17_1.png" />
 </div>
 <div class="section" id="plot-principal-direction-of-the-strain-tensor">
-<h2>2.5. Plot principal direction of the strain tensor<a class="headerlink" href="#plot-principal-direction-of-the-strain-tensor" title="Permalink to this headline">¶</a></h2>
+<h2>2.6. Plot principal direction of the strain tensor<a class="headerlink" href="#plot-principal-direction-of-the-strain-tensor" title="Permalink to this headline">¶</a></h2>
 <div class="code ipython3 highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
 <span class="n">data</span><span class="o">.</span><span class="n">strain</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">principal_tensor</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">space</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">twod</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">absolutemax</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">data</span><span class="o">.</span><span class="n">micro</span><span class="o">.</span><span class="n">plotBoundary</span><span class="p">()</span>

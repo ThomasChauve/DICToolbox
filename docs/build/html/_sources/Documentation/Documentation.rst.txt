@@ -178,9 +178,8 @@ VonMises equivalent strain field :
 .. image:: output_15_1.png
 
 
-.. code:: ipython3
-
-    ## Add microstructure on figure
+Add microstructure on figure
+----------------------------
 
 .. code:: ipython3
 
