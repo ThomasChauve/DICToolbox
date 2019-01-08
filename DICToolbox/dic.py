@@ -7,9 +7,6 @@ Created on 21 août 2015
 Toolbox for data obtained using 7D software create by Pierre Vacher
 7D software is software to perform Digital Image Correlation (DIC). This toolbox is used to analysed the data export from 7D software by using the exportation by 'txt>>gdr'
 
-.. warning:: In 7D version 0.9.5.178 there is a mistake during the expoprtation using 'txt>>gdr' dy=-dy and exy=-exy. Use 'correct7Dgdr.py' before using this toolbox
-.. note:: if you want reduce the error due to the DIC process by doing the mean of multiple output, please refers to 'mean7Dgdr.py'
-
 @author: Thomas Chauve
 @contact: thomas.chauve@lgge.obs.ujf-grenoble.fr
 @license: CC-BY-CC
