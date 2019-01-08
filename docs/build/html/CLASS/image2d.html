@@ -278,15 +278,9 @@ It can be used to work one every king of 2d image.</p>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">np.array dim=180</p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">data, it correspond to the true image use for the correlation</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="#DICToolbox.image2d.image2d" title="DICToolbox.image2d.image2d">image2d</a></p>
-</td>
-</tr>
 <tr class="field-even field"><th class="field-name">Exemple:</th><td class="field-body"><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Using a fake image</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">=</span><span class="n">image2d</span><span class="o">.</span><span class="n">image2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">res_auto</span><span class="p">,</span><span class="n">Cinf</span><span class="p">,</span><span class="n">profil</span><span class="p">,</span><span class="n">xi</span><span class="p">,</span><span class="n">cross</span><span class="p">,</span><span class="n">image</span><span class="p">]</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">auto_correlation</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">res_auto</span><span class="p">,</span><span class="n">Cinf</span><span class="p">,</span><span class="n">profil</span><span class="p">,</span><span class="n">xi</span><span class="p">,</span><span class="n">cross</span><span class="p">]</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">auto_correlation</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># plot the auto correlation function</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">res_auto</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="go">&gt;&gt;&gt;plt.show()</span>

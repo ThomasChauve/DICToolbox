@@ -513,12 +513,10 @@
 <span class="sd">        :rtype: np.array 180*length profile</span>
 <span class="sd">        :return: cross, it correspond to the length of the autocorrelation radius</span>
 <span class="sd">        :rtype: np.array dim=180</span>
-<span class="sd">	:return: data, it correspond to the true image use for the correlation</span>
-<span class="sd">        :rtype: image2d</span>
 <span class="sd">        :Exemple:</span>
 <span class="sd">            &gt;&gt;&gt; # Using a fake image</span>
 <span class="sd">            &gt;&gt;&gt; data=image2d.image2d(np.eye(200),1)</span>
-<span class="sd">            &gt;&gt;&gt; [res_auto,Cinf,profil,xi,cross,image]=data.auto_correlation(pad=2)</span>
+<span class="sd">            &gt;&gt;&gt; [res_auto,Cinf,profil,xi,cross]=data.auto_correlation(pad=2)</span>
 <span class="sd">            &gt;&gt;&gt; # plot the auto correlation function</span>
 <span class="sd">            &gt;&gt;&gt; res_auto.plot()</span>
 <span class="sd">            &gt;&gt;&gt;plt.show()</span>
@@ -588,8 +586,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">cross</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="nb">id</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
             
-        <span class="k">return</span> <span class="n">res_auto</span><span class="p">,</span><span class="n">Cinf</span><span class="p">,</span><span class="n">profil</span><span class="p">,</span><span class="n">xi</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">,</span><span class="n">cross</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">,</span><span class="n">image2d</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">)</span></div>
-    
+        <span class="k">return</span> <span class="n">res_auto</span><span class="p">,</span><span class="n">Cinf</span><span class="p">,</span><span class="n">profil</span><span class="p">,</span><span class="n">xi</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">,</span><span class="n">cross</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span></div>
 <div class="viewcode-block" id="image2d.extract_profil"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.extract_profil">[docs]</a>    <span class="k">def</span> <span class="nf">extract_profil</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">pos</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Extract data along a given profile</span>

@@ -360,12 +360,10 @@ class image2d(object):
         :rtype: np.array 180*length profile
         :return: cross, it correspond to the length of the autocorrelation radius
         :rtype: np.array dim=180
-	:return: data, it correspond to the true image use for the correlation
-        :rtype: image2d
         :Exemple:
             >>> # Using a fake image
             >>> data=image2d.image2d(np.eye(200),1)
-            >>> [res_auto,Cinf,profil,xi,cross,image]=data.auto_correlation(pad=2)
+            >>> [res_auto,Cinf,profil,xi,cross]=data.auto_correlation(pad=2)
             >>> # plot the auto correlation function
             >>> res_auto.plot()
             >>>plt.show()
@@ -435,8 +433,7 @@ class image2d(object):
             else:
                 cross[i]=id[0][0]
             
-        return res_auto,Cinf,profil,xi*self.res,cross*self.res,image2d(data,self.res)
-    
+        return res_auto,Cinf,profil,xi*self.res,cross*self.res
     def extract_profil(self,pos=0):
         '''
         Extract data along a given profile

@@ -93,8 +93,13 @@
 <li class="toctree-l2"><a class="reference internal" href="#componante-of-strain-tensor">2.2. Componante of strain tensor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#solid-rotation">2.3. Solid rotation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#equivalent-strain">2.4. Equivalent strain</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#add-microstructure-on-figure">2.5. Add microstructure on figure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#plot-principal-direction-of-the-strain-tensor">2.6. Plot principal direction of the strain tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plot-principal-direction-of-the-strain-tensor">2.5. Plot principal direction of the strain tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#autocorrelation-function">2.6. Autocorrelation function</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">2.6.1. Autocorrelation function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#autocorrelation-radius-vs-angle-of-profil">2.6.2. Autocorrelation radius vs angle of profil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#autocorrelation-profil">2.6.3. Autocorrelation profil</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="#extract-macroscopic-curve">3. Extract macroscopic curve</a></li>
@@ -176,6 +181,8 @@
 <div class="code ipython3 highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">DICToolbox.dic</span> <span class="k">as</span> <span class="nn">dic</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">Image</span>
 </pre></div>
 </div>
 <div class="code ipython3 highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Folder where output from 7D are</span>
@@ -286,9 +293,9 @@ Text(0.5, 1.0, '$\omega_{xy}$')
 </pre></div>
 </div>
 <img alt="../_images/output_15_1.png" src="../_images/output_15_1.png" />
+<div class="code ipython3 highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## Add microstructure on figure</span>
+</pre></div>
 </div>
-<div class="section" id="add-microstructure-on-figure">
-<h2>2.5. Add microstructure on figure<a class="headerlink" href="#add-microstructure-on-figure" title="Permalink to this headline">¶</a></h2>
 <div class="code ipython3 highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">data</span><span class="o">.</span><span class="n">strain</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">eqVonMises</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">colorbar</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">plasma</span><span class="p">)</span>
 <span class="n">data</span><span class="o">.</span><span class="n">micro</span><span class="o">.</span><span class="n">plotBoundary</span><span class="p">(</span><span class="n">dilatation</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -301,7 +308,7 @@ Text(0.5, 1.0, '$\omega_{xy}$')
 <img alt="../_images/output_17_1.png" src="../_images/output_17_1.png" />
 </div>
 <div class="section" id="plot-principal-direction-of-the-strain-tensor">
-<h2>2.6. Plot principal direction of the strain tensor<a class="headerlink" href="#plot-principal-direction-of-the-strain-tensor" title="Permalink to this headline">¶</a></h2>
+<h2>2.5. Plot principal direction of the strain tensor<a class="headerlink" href="#plot-principal-direction-of-the-strain-tensor" title="Permalink to this headline">¶</a></h2>
 <div class="code ipython3 highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
 <span class="n">data</span><span class="o">.</span><span class="n">strain</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">principal_tensor</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">space</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">twod</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">absolutemax</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">data</span><span class="o">.</span><span class="n">micro</span><span class="o">.</span><span class="n">plotBoundary</span><span class="p">()</span>
@@ -313,6 +320,78 @@ Text(0.5, 1.0, '$\omega_{xy}$')
 </div>
 <img alt="../_images/output_19_1.png" src="../_images/output_19_1.png" />
 </div>
+<div class="section" id="autocorrelation-function">
+<h2>2.6. Autocorrelation function<a class="headerlink" href="#autocorrelation-function" title="Permalink to this headline">¶</a></h2>
+<p>It shows how to do autocorrelation onequivalent strain VonMises</p>
+<div class="code ipython3 highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">res_auto</span><span class="p">,</span><span class="n">Cinf</span><span class="p">,</span><span class="n">profil</span><span class="p">,</span><span class="n">xi</span><span class="p">,</span><span class="n">cross</span><span class="p">]</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">strain</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">eqVonMises</span><span class="p">()</span><span class="o">.</span><span class="n">auto_correlation</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="id3">
+<h3>2.6.1. Autocorrelation function<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="code ipython3 highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">res_auto</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">colorbar</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">binary_r</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/output_23_0.png" src="../_images/output_23_0.png" />
+</div>
+<div class="section" id="autocorrelation-radius-vs-angle-of-profil">
+<h3>2.6.2. Autocorrelation radius vs angle of profil<a class="headerlink" href="#autocorrelation-radius-vs-angle-of-profil" title="Permalink to this headline">¶</a></h3>
+<p>Orientation of the angle value used below</p>
+<div class="code ipython3 highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;autocor.png&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/output_25_0.png"><img alt="../_images/output_25_0.png" src="../_images/output_25_0.png" style="width: 200px;" /></a>
+<p>It shows the Autocorrelation radius function of the direction</p>
+<div class="code ipython3 highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">angle</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="mi">89</span><span class="p">,</span><span class="mi">180</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">angle</span><span class="p">,</span><span class="n">cross</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="mi">90</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Angle (degre)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Correlation length (mm)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;Correlation length (mm)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/output_27_1.png" src="../_images/output_27_1.png" />
+<p>You can extract the maximum and the minimum radius and the orientation
+associated</p>
+<div class="code ipython3 highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">idmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">cross</span><span class="o">==</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">cross</span><span class="p">))</span>
+<span class="n">anmax</span><span class="o">=</span><span class="n">angle</span><span class="p">[</span><span class="n">idmax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">idmin</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">cross</span><span class="o">==</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">cross</span><span class="p">))</span>
+<span class="n">anmin</span><span class="o">=</span><span class="n">angle</span><span class="p">[</span><span class="n">idmin</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maximum : Correlation length = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">cross</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;mm, Angle = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">anmax</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Minimum : Correlation length = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">cross</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;mm, Angle = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">anmin</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Maximum</span> <span class="p">:</span> <span class="n">Correlation</span> <span class="n">length</span> <span class="o">=</span> <span class="mf">77.976</span><span class="n">mm</span><span class="p">,</span> <span class="n">Angle</span> <span class="o">=</span> <span class="mf">76.0</span>
+<span class="n">Minimum</span> <span class="p">:</span> <span class="n">Correlation</span> <span class="n">length</span> <span class="o">=</span> <span class="mf">10.773</span><span class="n">mm</span><span class="p">,</span> <span class="n">Angle</span> <span class="o">=</span> <span class="mf">21.0</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="autocorrelation-profil">
+<h3>2.6.3. Autocorrelation profil<a class="headerlink" href="#autocorrelation-profil" title="Permalink to this headline">¶</a></h3>
+<p>You can plot the Autocorrelation profil for each angle. Here we show for
+the minimum correlation length and the maximum correlation length. We
+add also the Cinf value</p>
+<div class="code ipython3 highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi</span><span class="p">[</span><span class="n">idmax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],:],</span><span class="n">profil</span><span class="p">[</span><span class="n">idmax</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],:],</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Max radius&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xi</span><span class="p">[</span><span class="n">idmin</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],:],</span><span class="n">profil</span><span class="p">[</span><span class="n">idmin</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],:],</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Min radius&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">xi</span><span class="p">)],[</span><span class="n">Cinf</span><span class="p">,</span><span class="n">Cinf</span><span class="p">],</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Cinf&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">xi</span><span class="p">)])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Displacement mm&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Correlation value&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;Correlation value&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/output_31_1.png" src="../_images/output_31_1.png" />
+</div>
+</div>
 </div>
 <div class="section" id="extract-macroscopic-curve">
 <h1>3. Extract macroscopic curve<a class="headerlink" href="#extract-macroscopic-curve" title="Permalink to this headline">¶</a></h1>
@@ -322,21 +401,16 @@ Text(0.5, 1.0, '$\omega_{xy}$')
 <div class="code ipython3 highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="o">/</span><span class="mf">3600.</span><span class="p">,</span><span class="n">macro_eyy</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;$&lt;\epsilon_</span><span class="si">{yy}</span><span class="s1">&gt;$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="o">/</span><span class="mf">3600.</span><span class="p">,</span><span class="n">macro_line</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Dic-ligne&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="s1">&#39;on&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (hours)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Macro strain&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">chauvet</span><span class="o">/</span><span class="n">anaconda3</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">cbook</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">424</span><span class="p">:</span> <span class="n">MatplotlibDeprecationWarning</span><span class="p">:</span>
-<span class="n">Passing</span> <span class="n">one</span> <span class="n">of</span> <span class="s1">&#39;on&#39;</span><span class="p">,</span> <span class="s1">&#39;true&#39;</span><span class="p">,</span> <span class="s1">&#39;off&#39;</span><span class="p">,</span> <span class="s1">&#39;false&#39;</span> <span class="k">as</span> <span class="n">a</span> <span class="n">boolean</span> <span class="ow">is</span> <span class="n">deprecated</span><span class="p">;</span> <span class="n">use</span> <span class="n">an</span> <span class="n">actual</span> <span class="n">boolean</span> <span class="p">(</span><span class="kc">True</span><span class="o">/</span><span class="kc">False</span><span class="p">)</span> <span class="n">instead</span><span class="o">.</span>
-  <span class="n">warn_deprecated</span><span class="p">(</span><span class="s2">&quot;2.2&quot;</span><span class="p">,</span> <span class="s2">&quot;Passing one of &#39;on&#39;, &#39;true&#39;, &#39;off&#39;, &#39;false&#39; as a &quot;</span>
-</pre></div>
-</div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;Macro strain&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/output_22_2.png" src="../_images/output_22_2.png" />
+<img alt="../_images/output_34_1.png" src="../_images/output_34_1.png" />
 </div>
 
 

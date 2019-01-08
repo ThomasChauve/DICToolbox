@@ -10,6 +10,8 @@ Load the data
     import DICToolbox.dic as dic
     import matplotlib.pyplot as plt
     import matplotlib.cm as cm
+    import numpy as np
+    from IPython.display import Image
 
 .. code:: ipython3
 
@@ -178,8 +180,9 @@ VonMises equivalent strain field :
 .. image:: output_15_1.png
 
 
-Add microstructure on figure
-----------------------------
+.. code:: ipython3
+
+    ## Add microstructure on figure
 
 .. code:: ipython3
 
@@ -224,6 +227,121 @@ Plot principal direction of the strain tensor
 .. image:: output_19_1.png
 
 
+Autocorrelation function
+------------------------
+
+It shows how to do autocorrelation onequivalent strain VonMises
+
+.. code:: ipython3
+
+    [res_auto,Cinf,profil,xi,cross]=data.strain[t].eqVonMises().auto_correlation(pad=2)
+
+Autocorrelation function
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: ipython3
+
+    plt.figure(figsize=(8,8))
+    res_auto.plot(colorbar=cm.binary_r)
+
+
+
+.. image:: output_23_0.png
+
+
+Autocorrelation radius vs angle of profil
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Orientation of the angle value used below
+
+.. code:: ipython3
+
+    Image('autocor.png', width=200)
+
+
+
+
+.. image:: output_25_0.png
+   :width: 200px
+
+
+
+It shows the Autocorrelation radius function of the direction
+
+.. code:: ipython3
+
+    angle=np.linspace(-90,89,180)
+    
+    plt.figure(figsize=(8,5))
+    plt.plot(angle,cross)
+    plt.grid()
+    plt.xlim([-90,90])
+    plt.xlabel('Angle (degre)')
+    plt.ylabel('Correlation length (mm)')
+
+
+
+
+.. parsed-literal::
+
+    Text(0, 0.5, 'Correlation length (mm)')
+
+
+
+
+.. image:: output_27_1.png
+
+
+You can extract the maximum and the minimum radius and the orientation
+associated
+
+.. code:: ipython3
+
+    idmax=np.where(cross==np.max(cross))
+    anmax=angle[idmax[0][0]]
+    idmin=np.where(cross==np.min(cross))
+    anmin=angle[idmin[0][0]]
+    print('Maximum : Correlation length = '+str(np.max(cross))+'mm, Angle = '+str(anmax))
+    print('Minimum : Correlation length = '+str(np.min(cross))+'mm, Angle = '+str(anmin))
+
+
+.. parsed-literal::
+
+    Maximum : Correlation length = 77.976mm, Angle = 76.0
+    Minimum : Correlation length = 10.773mm, Angle = 21.0
+
+
+Autocorrelation profil
+~~~~~~~~~~~~~~~~~~~~~~
+
+You can plot the Autocorrelation profil for each angle. Here we show for
+the minimum correlation length and the maximum correlation length. We
+add also the Cinf value
+
+.. code:: ipython3
+
+    plt.figure(figsize=(8,5))
+    plt.plot(xi[idmax[0][0],:],profil[idmax[0][0],:],'b',label='Max radius')
+    plt.plot(xi[idmin[0][0],:],profil[idmin[0][0],:],'r',label='Min radius')
+    plt.plot([0,np.max(xi)],[Cinf,Cinf],'k',label='Cinf')
+    plt.grid()
+    plt.xlim([0,np.max(xi)])
+    plt.xlabel('Displacement mm')
+    plt.ylabel('Correlation value')
+
+
+
+
+.. parsed-literal::
+
+    Text(0, 0.5, 'Correlation value')
+
+
+
+
+.. image:: output_31_1.png
+
+
 Extract macroscopic curve
 =========================
 
@@ -236,17 +354,10 @@ Extract macroscopic curve
     plt.figure(figsize=(8,5))
     plt.plot(time/3600.,macro_eyy,'b',label='$<\epsilon_{yy}>$')
     plt.plot(time/3600.,macro_line,'r',label='Dic-ligne')
-    plt.grid('on')
+    plt.grid()
     plt.legend()
     plt.xlabel('Time (hours)')
     plt.ylabel('Macro strain')
-
-
-.. parsed-literal::
-
-    /home/chauvet/anaconda3/lib/python3.7/site-packages/matplotlib/cbook/__init__.py:424: MatplotlibDeprecationWarning: 
-    Passing one of 'on', 'true', 'off', 'false' as a boolean is deprecated; use an actual boolean (True/False) instead.
-      warn_deprecated("2.2", "Passing one of 'on', 'true', 'off', 'false' as a "
 
 
 
@@ -258,5 +369,5 @@ Extract macroscopic curve
 
 
 
-.. image:: output_22_2.png
+.. image:: output_34_1.png
 
