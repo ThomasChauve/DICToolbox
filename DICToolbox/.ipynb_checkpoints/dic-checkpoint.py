@@ -7,9 +7,6 @@ Created on 21 août 2015
 Toolbox for data obtained using 7D software create by Pierre Vacher
 7D software is software to perform Digital Image Correlation (DIC). This toolbox is used to analysed the data export from 7D software by using the exportation by 'txt>>gdr'
 
-.. warning:: In 7D version 0.9.5.178 there is a mistake during the expoprtation using 'txt>>gdr' dy=-dy and exy=-exy. Use 'correct7Dgdr.py' before using this toolbox
-.. note:: if you want reduce the error due to the DIC process by doing the mean of multiple output, please refers to 'mean7Dgdr.py'
-
 @author: Thomas Chauve
 @contact: thomas.chauve@lgge.obs.ujf-grenoble.fr
 @license: CC-BY-CC
@@ -35,7 +32,7 @@ class dic(object):
     pass
 
 
-    def __init__(self, adr_data, resolution, time_step, adr_micro=0):
+    def __init__(self, time, u, v, strain, oxy, micro, grains):
         '''
         :param adr_data: folder path where the 7D output are store
         :type adr_data: str
@@ -48,62 +45,15 @@ class dic(object):
         '''
         
         # include time_step in the object
-        self.time=time_step
-                
-        # find out file from 7D
-        output=os.listdir(adr_data)
-        output.sort()
-        # loop on all the output
-        self.u=[]
-        self.v=[]
-        self.strain=[]
-        self.oxy=[]
-        for i in list(range(len(output))):
-            # load the file
-            data=np.loadtxt(adr_data + '/' + output[i])
-            # find not indexed point
-            id=np.where(data[:,4]!=0.0)
-            # replace not indexed point by NaN value
-            data[id,2:4]=np.NaN
-            data[id,5:8]=np.NaN
-            # for the first step it extract size sx,sy and window correlation value used in 7D
-            if (i==0):
-                n_dic=np.abs(data[0,1]-data[1,1])
-                nb_pix=np.size(data[:,0])
-                sx=np.int32(np.abs(data[0,0]-data[nb_pix-1,0])/n_dic+1)
-                sy=np.int32(np.abs(data[0,1]-data[nb_pix-1,1])/n_dic+1)
-            # Build image at time t=i
-            self.u.append(im2d.image2d(np.transpose(np.reshape(data[:,2]*resolution,[sx,sy])),n_dic*resolution))
-            self.v.append(im2d.image2d(np.transpose(np.reshape(data[:,3]*resolution,[sx,sy])),n_dic*resolution))
-            exx=im2d.image2d(np.transpose(np.reshape(data[:,5],[sx,sy])),n_dic*resolution)
-            eyy=im2d.image2d(np.transpose(np.reshape(data[:,6],[sx,sy])),n_dic*resolution)
-            exy=im2d.image2d(np.transpose(np.reshape(data[:,7],[sx,sy])),n_dic*resolution)
-            if i==0:
-                eaz=im2d.image2d(np.zeros([sy,sx]),n_dic*resolution)
-                
-            self.strain.append(sTM.symetricTensorMap(exx,eyy,eaz,exy,eaz,eaz))
-            self.oxy.append((self.u[i].diff('y')-self.v[i].diff('x'))*.5)
+        self.time=time
+        self.u=u
+        self.v=v
+        self.strain=strain
+        self.oxy=oxy
+        self.micro=micro
+        self.grains=grains
         
-        minx=np.int32(np.min(data[:,0])/n_dic)-1
-        maxx=np.int32(np.max(data[:,0])/n_dic)
-        miny=np.int32(np.min(-data[:,1])/n_dic)-1
-        maxy=np.int32(np.max(-data[:,1])/n_dic)
-        
-        # open the microstructure
-        if adr_micro==0:
-            self.micro=im2d.micro2d(np.zeros([sy,sx]),n_dic*resolution)
-        else:
-            micro_bmp = io.imread(adr_micro)
-            self.micro=im2d.micro2d(micro_bmp[miny:maxy,minx:maxx,0]/np.max(micro_bmp),n_dic*resolution)
-        
-        self.grains=self.micro.grain_label()
-        
-        # replace grains boundary with NaN number
-        self.grains.field=np.array(self.grains.field,float)
-        idx=np.where(self.micro.field==1)
-        self.grains.field[idx]=np.nan
-        
-    def crop(self):
+    def crop(self,xmin=0,xmax=0,ymin=0,ymax=0):
         '''
         Crop function to select the area of interest
         
@@ -114,24 +64,26 @@ class dic(object):
         .. note:: clic on the top left corner and bottom right corner to select the area
         '''
         
-        # plot the data
-        h=self.strain[len(self.u)-1].t22.plot()
-        self.micro.plotBoundary()
-        # select top left and bottom right corner for crop
-        print('Select top left and bottom right corner for crop :')
-        x=np.array(pylab.ginput(2))/self.u[1].res
-        plt.close("all")
-        # create x and Y coordinate
-        
-        xx=[x[0][0],x[1][0]]
-        yy=[x[0][1],x[1][1]]
-        # size of the initial map
-        ss=np.shape(self.u[0].field)
-        # find xmin xmax ymin and ymax
-        xmin=np.ceil(np.min(xx))
-        xmax=np.floor(np.max(xx))
-        ymin=ss[0]-np.ceil(np.max(yy))
-        ymax=ss[0]-np.floor(np.min(yy))
+        if (xmin+xmax+ymin+ymax)==0:
+            # plot the data
+            h=self.strain[len(self.u)-1].t22.plot()
+            self.micro.plotBoundary()
+            # select top left and bottom right corner for crop
+            print('Select top left and bottom right corner for crop :')
+            x=np.array(pylab.ginput(2))/self.u[1].res
+            plt.close("all")
+            # create x and Y coordinate
+
+            xx=[x[0][0],x[1][0]]
+            yy=[x[0][1],x[1][1]]
+            # size of the initial map
+            ss=np.shape(self.u[0].field)
+            # find xmin xmax ymin and ymax
+            xmin=np.int(np.ceil(np.min(xx)))
+            xmax=np.int(np.floor(np.max(xx)))
+            ymin=np.int(ss[0]-np.ceil(np.max(yy)))
+            ymax=np.int(ss[0]-np.floor(np.min(yy)))
+
         
         for i in list(range(len(self.strain))):
             # crop the map
@@ -162,6 +114,8 @@ class dic(object):
         self.grains.field=np.array(self.grains.field,float)
         idx=np.where(self.micro.field==1)
         self.grains.field[idx]=np.nan
+        
+        return np.array([xmin,xmax,ymin,ymax])
         
     def strain_macro(self,nb_line=3):
         '''
