@@ -17,34 +17,37 @@
   
 
   
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="1. image2d" href="image2d.html" />
     <link rel="prev" title="1. Load the data" href="../Documentation/Documentation.html" /> 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -138,7 +141,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>4. Function overview</li>
+      <li><span class="section-number">4. </span>Function overview</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -158,145 +161,132 @@
            <div itemprop="articleBody">
             
   <div class="section" id="function-overview">
-<h1>4. Function overview<a class="headerlink" href="#function-overview" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">4. </span>Function overview<a class="headerlink" href="#function-overview" title="Permalink to this headline">¶</a></h1>
 <p>Here we presente the function associated with the class dic</p>
 <div class="section" id="module-DICToolbox.dic">
-<span id="dic"></span><h2>4.1. dic<a class="headerlink" href="#module-DICToolbox.dic" title="Permalink to this headline">¶</a></h2>
+<span id="dic"></span><h2><span class="section-number">4.1. </span>dic<a class="headerlink" href="#module-DICToolbox.dic" title="Permalink to this headline">¶</a></h2>
 <p>Created on 21 août 2015</p>
 <span class="target" id="module-dic"></span><p>Toolbox for data obtained using 7D software create by Pierre Vacher
 7D software is software to perform Digital Image Correlation (DIC). This toolbox is used to analysed the data export from 7D software by using the exportation by ‘txt&gt;&gt;gdr’</p>
 <p>&#64;author: Thomas Chauve
 &#64;contact: <a class="reference external" href="mailto:thomas&#46;chauve&#37;&#52;&#48;lgge&#46;obs&#46;ujf-grenoble&#46;fr">thomas<span>&#46;</span>chauve<span>&#64;</span>lgge<span>&#46;</span>obs<span>&#46;</span>ujf-grenoble<span>&#46;</span>fr</a>
 &#64;license: CC-BY-CC</p>
-<dl class="class">
+<dl class="py class">
 <dt id="DICToolbox.dic.dic">
-<em class="property">class </em><code class="descclassname">DICToolbox.dic.</code><code class="descname">dic</code><span class="sig-paren">(</span><em>adr_data</em>, <em>resolution</em>, <em>time_step</em>, <em>adr_micro=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/dic.html#dic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.dic.dic" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">DICToolbox.dic.</code><code class="sig-name descname">dic</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">v</span></em>, <em class="sig-param"><span class="n">strain</span></em>, <em class="sig-param"><span class="n">oxy</span></em>, <em class="sig-param"><span class="n">micro</span></em>, <em class="sig-param"><span class="n">grains</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/dic.html#dic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.dic.dic" title="Permalink to this definition">¶</a></dt>
 <dd><p>‘dic’ is a python class to analyse data from 2D digital image correlation</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">this toolbox is build to work with the output from 7D using txt&gt;&gt;gdr export</p>
+<p class="admonition-title">Note</p>
+<p>this toolbox is build to work with the output from 7D using txt&gt;&gt;gdr export</p>
 </div>
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.dic.dic.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>adr_data</em>, <em>resolution</em>, <em>time_step</em>, <em>adr_micro=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/dic.html#dic.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.dic.dic.__init__" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>adr_data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – folder path where the 7D output are store</li>
-<li><strong>resolution</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – pixel size of the image used for DIC (millimeters)</li>
-<li><strong>time_step</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – time step between the picture (seconds)</li>
-<li><strong>adr_micro</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – path for the black and white skeleton of the microstructure (bmp format) (default 0 - no microstructure)</li>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">v</span></em>, <em class="sig-param"><span class="n">strain</span></em>, <em class="sig-param"><span class="n">oxy</span></em>, <em class="sig-param"><span class="n">micro</span></em>, <em class="sig-param"><span class="n">grains</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/dic.html#dic.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.dic.dic.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>adr_data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – folder path where the 7D output are store</p></li>
+<li><p><strong>resolution</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – pixel size of the image used for DIC (millimeters)</p></li>
+<li><p><strong>time_step</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – time step between the picture (seconds)</p></li>
+<li><p><strong>adr_micro</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – path for the black and white skeleton of the microstructure (bmp format) (default 0 - no microstructure)</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="DICToolbox.dic.dic.__weakref__">
-<code class="descname">__weakref__</code><a class="headerlink" href="#DICToolbox.dic.dic.__weakref__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__weakref__</code><a class="headerlink" href="#DICToolbox.dic.dic.__weakref__" title="Permalink to this definition">¶</a></dt>
 <dd><p>list of weak references to the object (if defined)</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.dic.dic.crop">
-<code class="descname">crop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/dic.html#dic.crop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.dic.dic.crop" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">crop</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xmin</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">xmax</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">ymin</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">ymax</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/dic.html#dic.crop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.dic.dic.crop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Crop function to select the area of interest</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">crop dic object</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="#DICToolbox.dic.dic" title="DICToolbox.dic.dic">dic</a></p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Exemple:</th><td class="field-body"><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">crop</span><span class="p">()</span>
+<dl class="field-list">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>crop dic object</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#DICToolbox.dic.dic" title="DICToolbox.dic.dic">dic</a></p>
+</dd>
+<dt class="field-odd">Exemple</dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">crop</span><span class="p">()</span>
 </pre></div>
 </div>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">clic on the top left corner and bottom right corner to select the area</p>
+<p class="admonition-title">Note</p>
+<p>clic on the top left corner and bottom right corner to select the area</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.dic.dic.find_pic">
-<code class="descname">find_pic</code><span class="sig-paren">(</span><em>strain_step=0.001</em>, <em>minst=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/dic.html#dic.find_pic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.dic.dic.find_pic" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">find_pic</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">strain_step</span><span class="o">=</span><span class="default_value">0.001</span></em>, <em class="sig-param"><span class="n">minst</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/dic.html#dic.find_pic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.dic.dic.find_pic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find picture number as between 2 picture the increment of deformation is macro_strain</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>strain_step</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – macroscopic strain between 2 picture.</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">nb_img</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>strain_step</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – macroscopic strain between 2 picture.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>nb_img</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.dic.dic.noise_map">
-<code class="descname">noise_map</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/dic.html#dic.noise_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.dic.dic.noise_map" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">noise_map</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/dic.html#dic.noise_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.dic.dic.noise_map" title="Permalink to this definition">¶</a></dt>
 <dd><p>compute the variance of a set of map for u, v, exx, eyy, exy, eeq
 :return su,sv,sexx,seyy,sexy,seeq:
 :rtype su,sv,sexx,seyy,sexy,seeq: im2d.image2d</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.dic.dic.strain_macro">
-<code class="descname">strain_macro</code><span class="sig-paren">(</span><em>nb_line=3</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/dic.html#dic.strain_macro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.dic.dic.strain_macro" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">strain_macro</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nb_line</span><span class="o">=</span><span class="default_value">3</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/dic.html#dic.strain_macro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.dic.dic.strain_macro" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the macroscopic strain along the y-axis (vertical) using 2 methods :</p>
 <p>(1)-mean of eyy</p>
 <p>(2)-dic line (see Fanny Grennerat Thesis)</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>nb_line</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – number of line skip at the top and bottom part of the picture during (2) evalutation</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">macro_eyy, method (1)</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">array</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">macro_line, method (2)</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">array</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">time, time of each point (seconds)</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">array</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Exemple:</th><td class="field-body"><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">time</span><span class="p">,</span><span class="n">macro_eyy</span><span class="p">,</span><span class="n">macro_line</span><span class="p">]</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">strain_macro</span><span class="p">()</span>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nb_line</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of line skip at the top and bottom part of the picture during (2) evalutation</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>macro_eyy, method (1)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>macro_line, method (2)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>time, time of each point (seconds)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+<dt class="field-even">Exemple</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">time</span><span class="p">,</span><span class="n">macro_eyy</span><span class="p">,</span><span class="n">macro_line</span><span class="p">]</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">strain_macro</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">macro_eyy</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">If you have macro_eyy~=-macro_line, it is because you did not correct the gdr output</p>
+<p class="admonition-title">Warning</p>
+<p>If you have macro_eyy~=-macro_line, it is because you did not correct the gdr output</p>
 </div>
 </dd></dl>
 
@@ -316,7 +306,7 @@
         <a href="image2d.html" class="btn btn-neutral float-right" title="1. image2d" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../Documentation/Documentation.html" class="btn btn-neutral" title="1. Load the data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../Documentation/Documentation.html" class="btn btn-neutral float-left" title="1. Load the data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -342,26 +332,16 @@
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

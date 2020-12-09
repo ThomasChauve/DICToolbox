@@ -17,32 +17,35 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -168,8 +171,8 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
-<span class="kn">from</span> <span class="nn">skimage</span> <span class="k">import</span> <span class="n">io</span>
-<span class="kn">from</span> <span class="nn">skimage</span> <span class="k">import</span> <span class="n">morphology</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">io</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">morphology</span>
 <span class="kn">import</span> <span class="nn">scipy</span>
 <span class="kn">import</span> <span class="nn">pylab</span>
 <span class="kn">import</span> <span class="nn">datetime</span>
@@ -182,7 +185,7 @@
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">pass</span>
 
-<div class="viewcode-block" id="image2d.__init__"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">resolution</span><span class="p">):</span>
+<div class="viewcode-block" id="image2d.__init__"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">resolution</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Constructor : field is a matrix and resolution is the step size in mm</span>
 <span class="sd">        </span>
@@ -320,7 +323,7 @@
         
         <span class="k">return</span> <span class="n">dmap</span></div>
     
-<div class="viewcode-block" id="image2d.__add__"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.__add__">[docs]</a>    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<div class="viewcode-block" id="image2d.__add__"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.__add__">[docs]</a>    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Sum of 2 maps</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -329,7 +332,7 @@
         <span class="k">elif</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">image2d</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">+</span><span class="n">other</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">)</span></div>
             
-<div class="viewcode-block" id="image2d.__sub__"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.__sub__">[docs]</a>    <span class="k">def</span> <span class="nf">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<div class="viewcode-block" id="image2d.__sub__"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.__sub__">[docs]</a>    <span class="k">def</span> <span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Subtract of 2 maps</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -338,7 +341,7 @@
         <span class="k">elif</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">float</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">image2d</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">-</span><span class="n">other</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">res</span><span class="p">)</span></div>
     
-<div class="viewcode-block" id="image2d.__mul__"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.__mul__">[docs]</a>    <span class="k">def</span> <span class="nf">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+<div class="viewcode-block" id="image2d.__mul__"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.image2d.__mul__">[docs]</a>    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Multiply case by case</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -649,7 +652,7 @@
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">pass</span>
 
-<div class="viewcode-block" id="mask2d.__init__"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.mask2d.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">field</span><span class="p">,</span> <span class="n">resolution</span><span class="p">):</span>
+<div class="viewcode-block" id="mask2d.__init__"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.mask2d.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">field</span><span class="p">,</span> <span class="n">resolution</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Constructor : field is a matrix and resolution is the step size in mm</span>
 <span class="sd">        </span>
@@ -711,7 +714,7 @@
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">pass</span>
 
-<div class="viewcode-block" id="micro2d.__init__"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.micro2d.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">field</span><span class="p">,</span> <span class="n">resolution</span><span class="p">):</span>
+<div class="viewcode-block" id="micro2d.__init__"><a class="viewcode-back" href="../../CLASS/image2d.html#DICToolbox.image2d.micro2d.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">field</span><span class="p">,</span> <span class="n">resolution</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Constructor : field is a matrix and resolution is the step size in mm</span>
 <span class="sd">        </span>
@@ -815,26 +818,16 @@
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

@@ -17,34 +17,37 @@
   
 
   
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3. utils" href="utils.html" />
     <link rel="prev" title="1. image2d" href="image2d.html" /> 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -139,7 +142,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>2. symetricTensorMap</li>
+      <li><span class="section-number">2. </span>symetricTensorMap</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -159,187 +162,168 @@
            <div itemprop="articleBody">
             
   <div class="section" id="symetrictensormap">
-<h1>2. symetricTensorMap<a class="headerlink" href="#symetrictensormap" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">2. </span>symetricTensorMap<a class="headerlink" href="#symetrictensormap" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
-<h2>2.1. Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.1. </span>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p><strong>symetricTensorMap</strong> is a class to store and work on symetric Tensor at each point of a 2D map. It is used to store strain tensor map from Digital Image Correlation here. But it can be used to store every kind of 3x3 Tensor on 2D map as stress or others.</p>
 </div>
 <div class="section" id="module-DICToolbox.symetricTensorMap">
-<span id="function"></span><h2>2.2. Function<a class="headerlink" href="#module-DICToolbox.symetricTensorMap" title="Permalink to this headline">¶</a></h2>
+<span id="function"></span><h2><span class="section-number">2.2. </span>Function<a class="headerlink" href="#module-DICToolbox.symetricTensorMap" title="Permalink to this headline">¶</a></h2>
 <span class="target" id="module-symetricTensorMap"></span><p>Created on 21 oct. 2015
 This class defined map of symetric def positive tensor map.</p>
 <p>&#64;author: Thomas Chauve
 &#64;contact: <a class="reference external" href="mailto:thomas&#46;chauve&#37;&#52;&#48;lgge&#46;obs&#46;ujf-grenoble&#46;fr">thomas<span>&#46;</span>chauve<span>&#64;</span>lgge<span>&#46;</span>obs<span>&#46;</span>ujf-grenoble<span>&#46;</span>fr</a>
 &#64;license: CC-BY-CC</p>
-<dl class="class">
+<dl class="py class">
 <dt id="DICToolbox.symetricTensorMap.symetricTensorMap">
-<em class="property">class </em><code class="descclassname">DICToolbox.symetricTensorMap.</code><code class="descname">symetricTensorMap</code><span class="sig-paren">(</span><em>t11</em>, <em>t22</em>, <em>t33</em>, <em>t12</em>, <em>t13</em>, <em>t23</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/symetricTensorMap.html#symetricTensorMap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.symetricTensorMap.symetricTensorMap" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">DICToolbox.symetricTensorMap.</code><code class="sig-name descname">symetricTensorMap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t11</span></em>, <em class="sig-param"><span class="n">t22</span></em>, <em class="sig-param"><span class="n">t33</span></em>, <em class="sig-param"><span class="n">t12</span></em>, <em class="sig-param"><span class="n">t13</span></em>, <em class="sig-param"><span class="n">t23</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/symetricTensorMap.html#symetricTensorMap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.symetricTensorMap.symetricTensorMap" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class defined map of symetric def positive tensor map.</p>
 <p>This toolbox is running on python and need various packages :</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Library:</th><td class="field-body">image2d</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
+<dl class="field-list simple">
+<dt class="field-odd">Library</dt>
+<dd class="field-odd"><p>image2d</p>
+</dd>
+</dl>
+<dl class="py method">
 <dt id="DICToolbox.symetricTensorMap.symetricTensorMap.__add__">
-<code class="descname">__add__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/symetricTensorMap.html#symetricTensorMap.__add__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.symetricTensorMap.symetricTensorMap.__add__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__add__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/symetricTensorMap.html#symetricTensorMap.__add__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.symetricTensorMap.symetricTensorMap.__add__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the sum of two map tensor</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">symetricTensorMap</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#DICToolbox.symetricTensorMap.symetricTensorMap" title="DICToolbox.symetricTensorMap.symetricTensorMap">symetricTensorMap</a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>symetricTensorMap</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#DICToolbox.symetricTensorMap.symetricTensorMap" title="DICToolbox.symetricTensorMap.symetricTensorMap">symetricTensorMap</a></p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.symetricTensorMap.symetricTensorMap.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>t11</em>, <em>t22</em>, <em>t33</em>, <em>t12</em>, <em>t13</em>, <em>t23</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/symetricTensorMap.html#symetricTensorMap.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.symetricTensorMap.symetricTensorMap.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t11</span></em>, <em class="sig-param"><span class="n">t22</span></em>, <em class="sig-param"><span class="n">t33</span></em>, <em class="sig-param"><span class="n">t12</span></em>, <em class="sig-param"><span class="n">t13</span></em>, <em class="sig-param"><span class="n">t23</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/symetricTensorMap.html#symetricTensorMap.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.symetricTensorMap.symetricTensorMap.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build symetricTensorMap object with 6 map (image2d object)</p>
-<dl class="docutils">
-<dt>t11 t12 t13</dt>
-<dd><dl class="first last docutils">
-<dt>t22 t23</dt>
-<dd>t33</dd>
+<dl class="simple">
+<dt>t11 t12 t13</dt><dd><dl class="simple">
+<dt>t22 t23</dt><dd><p>t33</p>
+</dd>
 </dl>
 </dd>
 </dl>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>tii</strong> (<a class="reference internal" href="image2d.html#DICToolbox.image2d.image2d" title="DICToolbox.image2d.image2d"><em>image2d</em></a>) – map of tii composante</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">symetricTensorMap object</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#DICToolbox.symetricTensorMap.symetricTensorMap" title="DICToolbox.symetricTensorMap.symetricTensorMap">symetricTensorMap</a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tii</strong> (<a class="reference internal" href="image2d.html#DICToolbox.image2d.image2d" title="DICToolbox.image2d.image2d"><em>image2d</em></a>) – map of tii composante</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>symetricTensorMap object</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#DICToolbox.symetricTensorMap.symetricTensorMap" title="DICToolbox.symetricTensorMap.symetricTensorMap">symetricTensorMap</a></p>
+</dd>
+</dl>
 <p>symetricTensorMap structure :</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Element:</th><td class="field-body"><a href="#id1"><span class="problematic" id="id2">*</span></a>.tii : 6 ‘image2d’</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Element</dt>
+<dd class="field-odd"><p><a href="#id1"><span class="problematic" id="id2">*</span></a>.tii : 6 ‘image2d’</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.symetricTensorMap.symetricTensorMap.__mul__">
-<code class="descname">__mul__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/symetricTensorMap.html#symetricTensorMap.__mul__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.symetricTensorMap.symetricTensorMap.__mul__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__mul__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/symetricTensorMap.html#symetricTensorMap.__mul__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.symetricTensorMap.symetricTensorMap.__mul__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the multiplication pixel by pixel of two map tensor</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">symetricTensorMap</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#DICToolbox.symetricTensorMap.symetricTensorMap" title="DICToolbox.symetricTensorMap.symetricTensorMap">symetricTensorMap</a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>symetricTensorMap</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#DICToolbox.symetricTensorMap.symetricTensorMap" title="DICToolbox.symetricTensorMap.symetricTensorMap">symetricTensorMap</a></p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="DICToolbox.symetricTensorMap.symetricTensorMap.__weakref__">
-<code class="descname">__weakref__</code><a class="headerlink" href="#DICToolbox.symetricTensorMap.symetricTensorMap.__weakref__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__weakref__</code><a class="headerlink" href="#DICToolbox.symetricTensorMap.symetricTensorMap.__weakref__" title="Permalink to this definition">¶</a></dt>
 <dd><p>list of weak references to the object (if defined)</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.symetricTensorMap.symetricTensorMap.diag">
-<code class="descname">diag</code><span class="sig-paren">(</span><em>twod=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/symetricTensorMap.html#symetricTensorMap.diag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.symetricTensorMap.symetricTensorMap.diag" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">diag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">twod</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/symetricTensorMap.html#symetricTensorMap.diag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.symetricTensorMap.symetricTensorMap.diag" title="Permalink to this definition">¶</a></dt>
 <dd><p>Diagonalisation of the symetricTensorMap</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>twod</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – use a 2d symetric tensor (=&gt; t33=t23=t13=0) (default True)</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a, eigenvalue dim(3*n*m) where n*m is the dimension of the map (self.t11.field.shape)</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array (3*n*m)</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">v, eigenvector dim(3*3*n*m) where n*m is the dimension of the map (self.t11.field.shape)</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">array (3*n*m)</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>twod</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – use a 2d symetric tensor (=&gt; t33=t23=t13=0) (default True)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a, eigenvalue dim(3*n*m) where n*m is the dimension of the map (self.t11.field.shape)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array (3*n*m)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>v, eigenvector dim(3*3*n*m) where n*m is the dimension of the map (self.t11.field.shape)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array (3*n*m)</p>
+</dd>
+</dl>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">the eigenvector v(:,k,n,m) is associated to the eigenvalue a(k,n,m)</p>
+<p class="admonition-title">Note</p>
+<p>the eigenvector v(:,k,n,m) is associated to the eigenvalue a(k,n,m)</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.symetricTensorMap.symetricTensorMap.eqVonMises">
-<code class="descname">eqVonMises</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/symetricTensorMap.html#symetricTensorMap.eqVonMises"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.symetricTensorMap.symetricTensorMap.eqVonMises" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">eqVonMises</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/symetricTensorMap.html#symetricTensorMap.eqVonMises"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.symetricTensorMap.symetricTensorMap.eqVonMises" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the Von Mises equivalent norm of the tensor</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Von Mises equivalent norm (2/3*eij*eij)^0.5</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="image2d.html#DICToolbox.image2d.image2d" title="DICToolbox.image2d.image2d">image2d</a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Von Mises equivalent norm (2/3*eij*eij)^0.5</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="image2d.html#DICToolbox.image2d.image2d" title="DICToolbox.image2d.image2d">image2d</a></p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.symetricTensorMap.symetricTensorMap.eqtensor2d">
-<code class="descname">eqtensor2d</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/symetricTensorMap.html#symetricTensorMap.eqtensor2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.symetricTensorMap.symetricTensorMap.eqtensor2d" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">eqtensor2d</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/symetricTensorMap.html#symetricTensorMap.eqtensor2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.symetricTensorMap.symetricTensorMap.eqtensor2d" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the equivalent norm of the tensor as it is a 2D mesurement</p>
 <p>teq=sqrt(2/3*(t11^2+t22^2+2*t12^2))</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">equivalent norm as it is a 2d measurement</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="image2d.html#DICToolbox.image2d.image2d" title="DICToolbox.image2d.image2d">image2d</a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>equivalent norm as it is a 2d measurement</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="image2d.html#DICToolbox.image2d.image2d" title="DICToolbox.image2d.image2d">image2d</a></p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.symetricTensorMap.symetricTensorMap.principal_tensor">
-<code class="descname">principal_tensor</code><span class="sig-paren">(</span><em>scale=100</em>, <em>space=5</em>, <em>twod=False</em>, <em>absolutemax=False</em>, <em>colorbarcenter=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/symetricTensorMap.html#symetricTensorMap.principal_tensor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.symetricTensorMap.symetricTensorMap.principal_tensor" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">principal_tensor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">scale</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">space</span><span class="o">=</span><span class="default_value">5</span></em>, <em class="sig-param"><span class="n">twod</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">absolutemax</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">colorbarcenter</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/symetricTensorMap.html#symetricTensorMap.principal_tensor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.symetricTensorMap.symetricTensorMap.principal_tensor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plot the principal tensor direction</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>scale</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – scale of the arrow (default 100)</li>
-<li><strong>space</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – take only 1 value every ‘space’ value to not charge the picture to much (default 5)</li>
-<li><strong>twod</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – use a 2d symetric tensor (=&gt; t33=t23=t13=0) (default False)</li>
-<li><strong>colorbarcenter</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – do you want center the colorbar around 0</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scale</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – scale of the arrow (default 100)</p></li>
+<li><p><strong>space</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – take only 1 value every ‘space’ value to not charge the picture to much (default 5)</p></li>
+<li><p><strong>twod</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – use a 2d symetric tensor (=&gt; t33=t23=t13=0) (default False)</p></li>
+<li><p><strong>colorbarcenter</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – do you want center the colorbar around 0</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">image of the principal tensor direction</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">matplotlib.pyplot</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>image of the principal tensor direction</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>matplotlib.pyplot</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -358,7 +342,7 @@ This class defined map of symetric def positive tensor map.</p>
         <a href="utils.html" class="btn btn-neutral float-right" title="3. utils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="image2d.html" class="btn btn-neutral" title="1. image2d" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="image2d.html" class="btn btn-neutral float-left" title="1. image2d" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -384,26 +368,16 @@ This class defined map of symetric def positive tensor map.</p>
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

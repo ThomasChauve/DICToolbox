@@ -17,34 +17,37 @@
   
 
   
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2. symetricTensorMap" href="sTM.html" />
     <link rel="prev" title="4. Function overview" href="dic.html" /> 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -139,7 +142,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>1. image2d</li>
+      <li><span class="section-number">1. </span>image2d</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -159,126 +162,120 @@
            <div itemprop="articleBody">
             
   <div class="section" id="image2d">
-<h1>1. image2d<a class="headerlink" href="#image2d" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">1. </span>image2d<a class="headerlink" href="#image2d" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="description">
-<h2>1.1. Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.1. </span>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
 <p><strong>image2d</strong> is a class to store and work on 2d image in voxel. It is used to store the different variable in aita (phi1,phi,qua, …)
 It can be used to work one every king of 2d image.</p>
 <p>There is two class that herite from image2d :</p>
 <ol class="arabic simple">
-<li><strong>mask2d</strong> to work on mask</li>
-<li><strong>micro2d</strong> to work with microstructure</li>
+<li><p><strong>mask2d</strong> to work on mask</p></li>
+<li><p><strong>micro2d</strong> to work with microstructure</p></li>
 </ol>
 </div>
 <div class="section" id="module-DICToolbox.image2d">
-<span id="function"></span><h2>1.2. Function<a class="headerlink" href="#module-DICToolbox.image2d" title="Permalink to this headline">¶</a></h2>
+<span id="function"></span><h2><span class="section-number">1.2. </span>Function<a class="headerlink" href="#module-DICToolbox.image2d" title="Permalink to this headline">¶</a></h2>
 <p>Created on 3 juil. 2015</p>
 <p>image2d is a class used to manipulate image under matrix shape and to do the analyses on the picture</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">It has been build to manipulate both aita data and dic data</p>
+<p class="admonition-title">Note</p>
+<p>It has been build to manipulate both aita data and dic data</p>
 </div>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">As all function are applicable to aita and dic data, please be careful of the meaning of what you are doing depending of the input data used !</p>
+<p class="admonition-title">Warning</p>
+<p>As all function are applicable to aita and dic data, please be careful of the meaning of what you are doing depending of the input data used !</p>
 </div>
 <p>&#64;author: Thomas Chauve
 &#64;contact: <a class="reference external" href="mailto:thomas&#46;chauve&#37;&#52;&#48;univ-grenoble-alpes&#46;fr">thomas<span>&#46;</span>chauve<span>&#64;</span>univ-grenoble-alpes<span>&#46;</span>fr</a>
 &#64;license: CC-BY-CC</p>
-<dl class="class">
+<dl class="py class">
 <dt id="DICToolbox.image2d.image2d">
-<em class="property">class </em><code class="descclassname">DICToolbox.image2d.</code><code class="descname">image2d</code><span class="sig-paren">(</span><em>field</em>, <em>resolution</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">DICToolbox.image2d.</code><code class="sig-name descname">image2d</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">resolution</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d" title="Permalink to this definition">¶</a></dt>
 <dd><p>image2d is a class for map of scalar data</p>
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.image2d.image2d.__add__">
-<code class="descname">__add__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.__add__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.__add__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__add__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.__add__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.__add__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sum of 2 maps</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.image2d.image2d.__div__">
-<code class="descname">__div__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.__div__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.__div__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__div__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.__div__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.__div__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Divide self by other case by case</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.image2d.image2d.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>field</em>, <em>resolution</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">resolution</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructor : field is a matrix and resolution is the step size in mm</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>field</strong> (<em>array</em>) – tabular of scalar data</li>
-<li><strong>resolution</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – step size resolution (millimeters)</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>field</strong> (<em>array</em>) – tabular of scalar data</p></li>
+<li><p><strong>resolution</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – step size resolution (millimeters)</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.image2d.image2d.__mul__">
-<code class="descname">__mul__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.__mul__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.__mul__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__mul__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.__mul__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.__mul__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Multiply case by case</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.image2d.image2d.__sub__">
-<code class="descname">__sub__</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.__sub__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.__sub__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__sub__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">other</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.__sub__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.__sub__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Subtract of 2 maps</p>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="DICToolbox.image2d.image2d.__weakref__">
-<code class="descname">__weakref__</code><a class="headerlink" href="#DICToolbox.image2d.image2d.__weakref__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__weakref__</code><a class="headerlink" href="#DICToolbox.image2d.image2d.__weakref__" title="Permalink to this definition">¶</a></dt>
 <dd><p>list of weak references to the object (if defined)</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.image2d.image2d.auto_correlation">
-<code class="descname">auto_correlation</code><span class="sig-paren">(</span><em>pad=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.auto_correlation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.auto_correlation" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">auto_correlation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pad</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.auto_correlation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.auto_correlation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the auto-correlation function from Dumoulin 2003</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pad</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – padding with mean data (default 1)</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">res_auto which the auto correlation function</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="#DICToolbox.image2d.image2d" title="DICToolbox.image2d.image2d">image2d</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Cinf see equation 6 Doumalin 2003</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)">float</a></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">profil, it correspond to 180 profile taken for along line with direction between 0 and 180°. The profil[i,:] correspond to a line making an angle of i degree from x direction.</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">np.array 180*length profile</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">xi, it correspond to the distance along the profile for the variable profile</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">np.array 180*length profile</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">cross, it correspond to the length of the autocorrelation radius</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">np.array dim=180</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Exemple:</th><td class="field-body"><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Using a fake image</span>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pad</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – padding with mean data (default 1)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>res_auto which the auto correlation function</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#DICToolbox.image2d.image2d" title="DICToolbox.image2d.image2d">image2d</a></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Cinf see equation 6 Doumalin 2003</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>profil, it correspond to 180 profile taken for along line with direction between 0 and 180°. The profil[i,:] correspond to a line making an angle of i degree from x direction.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array 180*length profile</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>xi, it correspond to the distance along the profile for the variable profile</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array 180*length profile</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>cross, it correspond to the length of the autocorrelation radius</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array dim=180</p>
+</dd>
+<dt class="field-even">Exemple</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Using a fake image</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">=</span><span class="n">image2d</span><span class="o">.</span><span class="n">image2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">res_auto</span><span class="p">,</span><span class="n">Cinf</span><span class="p">,</span><span class="n">profil</span><span class="p">,</span><span class="n">xi</span><span class="p">,</span><span class="n">cross</span><span class="p">]</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">auto_correlation</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># plot the auto correlation function</span>
@@ -304,180 +301,163 @@ It can be used to work one every king of 2d image.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.image2d.image2d.diff">
-<code class="descname">diff</code><span class="sig-paren">(</span><em>axis</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.diff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.diff" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">diff</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">axis</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.diff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.diff" title="Permalink to this definition">¶</a></dt>
 <dd><p>Derive the image along the axis define</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – ‘x’ to do du/dx or ‘y’ to do du/dy</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">differential of the map in respect to the ‘axis’ wanted</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#DICToolbox.image2d.image2d" title="DICToolbox.image2d.image2d">image2d</a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – ‘x’ to do du/dx or ‘y’ to do du/dy</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>differential of the map in respect to the ‘axis’ wanted</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#DICToolbox.image2d.image2d" title="DICToolbox.image2d.image2d">image2d</a></p>
+</dd>
+</dl>
 <div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">‘x’ axis is left to right and ‘y’ is bottom to top direction</p>
+<p class="admonition-title">Warning</p>
+<p>‘x’ axis is left to right and ‘y’ is bottom to top direction</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.image2d.image2d.extract_data">
-<code class="descname">extract_data</code><span class="sig-paren">(</span><em>pos=[]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.extract_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.extract_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">extract_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pos</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.extract_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.extract_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract the value at the position ‘pos’ or where you clic</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pos</strong> (<em>array</em>) – array [x,y] position of the data, if pos==[], clic to select the pixel</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pos</strong> (<em>array</em>) – array [x,y] position of the data, if pos==[], clic to select the pixel</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.image2d.image2d.extract_profil">
-<code class="descname">extract_profil</code><span class="sig-paren">(</span><em>pos=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.extract_profil"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.extract_profil" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">extract_profil</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pos</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.extract_profil"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.extract_profil" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract data along a given profile</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pos</strong> (<em>np.array dim 2*2</em>) – correspond to the position of the line np.array([[X0,Y0],[X1,Y1]])</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">x</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">postion along the profile</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">out</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">value along the profile</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">pos</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">starting and ending points</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pos</strong> (<em>np.array dim 2*2</em>) – correspond to the position of the line np.array([[X0,Y0],[X1,Y1]])</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>x</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>postion along the profile</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>out</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>value along the profile</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>pos</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>starting and ending points</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.image2d.image2d.imresize">
-<code class="descname">imresize</code><span class="sig-paren">(</span><em>res</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.imresize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.imresize" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">imresize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">res</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.imresize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.imresize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resize the image with nearest interpolation to have a pixel of the length given in res</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>res</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – new resolution map wanted (millimeters)</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>res</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – new resolution map wanted (millimeters)</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.image2d.image2d.mask_build">
-<code class="descname">mask_build</code><span class="sig-paren">(</span><em>polygone=False</em>, <em>r=0</em>, <em>grainId=[]</em>, <em>pos_center=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.mask_build"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.mask_build" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">mask_build</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">polygone</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">r</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">grainId</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">pos_center</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.mask_build"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.mask_build" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a mask map with NaN value where you don’t want data and one were you want
 The default mask is a circle of center you choose and radius you define.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>polygone</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – make a polygone mask (‘not yet implemented’)</li>
-<li><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – radius of the circle (warning what is the dimention of r mm ?)</li>
-<li><strong>grainId</strong> – You select the grainId you want in an array</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>polygone</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – make a polygone mask (‘not yet implemented’)</p></li>
+<li><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – radius of the circle (warning what is the dimention of r mm ?)</p></li>
+<li><p><strong>grainId</strong> – You select the grainId you want in an array</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body"><p class="first">array</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">mask</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="#DICToolbox.image2d.image2d" title="DICToolbox.image2d.image2d">image2d</a></p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">vec (vector of grainId is selction by grain or pos_center if selection by circle or 0 if polygone )</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">array</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p>array</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>mask</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#DICToolbox.image2d.image2d" title="DICToolbox.image2d.image2d">image2d</a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>vec (vector of grainId is selction by grain or pos_center if selection by circle or 0 if polygone )</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>array</p>
+</dd>
+</dl>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">if you want applied a mask one your data just do data*mask where data is an image2d object</p>
+<p class="admonition-title">Note</p>
+<p>if you want applied a mask one your data just do data*mask where data is an image2d object</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.image2d.image2d.plot">
-<code class="descname">plot</code><span class="sig-paren">(</span><em>vmin=nan</em>, <em>vmax=nan</em>, <em>colorbarcenter=False</em>, <em>colorbar=&lt;matplotlib.colors.LinearSegmentedColormap object&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.plot" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param">vmin=nan</em>, <em class="sig-param">vmax=nan</em>, <em class="sig-param">colorbarcenter=False</em>, <em class="sig-param">colorbar=&lt;matplotlib.colors.LinearSegmentedColormap object&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.plot" title="Permalink to this definition">¶</a></dt>
 <dd><p>plot the image2d</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>vmin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – minimum value for the colorbar</li>
-<li><strong>vmax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – maximun value for the colorbar</li>
-<li><strong>colorbarcenter</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><em>bool</em></a>) – do you want center the colorbar around 0</li>
-<li><strong>colorbar</strong> – colorbar from matplotlib.cm</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vmin</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – minimum value for the colorbar</p></li>
+<li><p><strong>vmax</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – maximun value for the colorbar</p></li>
+<li><p><strong>colorbarcenter</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – do you want center the colorbar around 0</p></li>
+<li><p><strong>colorbar</strong> – colorbar from matplotlib.cm</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">colorbar : cm.jet for eqstrain-stress</p>
+<p class="admonition-title">Note</p>
+<p>colorbar : cm.jet for eqstrain-stress</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.image2d.image2d.pow">
-<code class="descname">pow</code><span class="sig-paren">(</span><em>nb</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.pow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.pow" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">pow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nb</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.pow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.pow" title="Permalink to this definition">¶</a></dt>
 <dd><p>map power nb</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>nb</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – </td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>nb</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – </p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.image2d.image2d.skeleton">
-<code class="descname">skeleton</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.skeleton"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.skeleton" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">skeleton</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.skeleton"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.skeleton" title="Permalink to this definition">¶</a></dt>
 <dd><p>Skeletonized a label map build by grain_label</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.image2d.image2d.triple_junction">
-<code class="descname">triple_junction</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.triple_junction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.triple_junction" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">triple_junction</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.triple_junction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.triple_junction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Localized the triple junction</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.image2d.image2d.vtk_export">
-<code class="descname">vtk_export</code><span class="sig-paren">(</span><em>nameId</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.vtk_export"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.vtk_export" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">vtk_export</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">nameId</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#image2d.vtk_export"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.image2d.vtk_export" title="Permalink to this definition">¶</a></dt>
 <dd><p>Export the image2d into vtk file
 :param nameId: name of the output file
 :type name: str</p>
@@ -485,130 +465,112 @@ The default mask is a circle of center you choose and radius you define.</p>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="DICToolbox.image2d.mask2d">
-<em class="property">class </em><code class="descclassname">DICToolbox.image2d.</code><code class="descname">mask2d</code><span class="sig-paren">(</span><em>field</em>, <em>resolution</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#mask2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.mask2d" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">DICToolbox.image2d.</code><code class="sig-name descname">mask2d</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">resolution</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#mask2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.mask2d" title="Permalink to this definition">¶</a></dt>
 <dd><p>mask2d is a class which herit from image2d but it is restricted to microstructure object (background NaN, selected area 1)</p>
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.image2d.mask2d.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>field</em>, <em>resolution</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#mask2d.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.mask2d.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">resolution</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#mask2d.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.mask2d.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructor : field is a matrix and resolution is the step size in mm</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>field</strong> (<em>array</em>) – tabular of scalar data</li>
-<li><strong>resolution</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – step size resolution (millimeters)</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>field</strong> (<em>array</em>) – tabular of scalar data</p></li>
+<li><p><strong>resolution</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – step size resolution (millimeters)</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.image2d.mask2d.complementary">
-<code class="descname">complementary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#mask2d.complementary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.mask2d.complementary" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">complementary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#mask2d.complementary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.mask2d.complementary" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return complementary mask</p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.image2d.mask2d.load_mask">
-<code class="descname">load_mask</code><span class="sig-paren">(</span><em>res=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#mask2d.load_mask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.mask2d.load_mask" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">load_mask</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">res</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#mask2d.load_mask"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.mask2d.load_mask" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a mask from a black and white bmp image where whith correspond to the selected area</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>adr_bmp</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><em>str</em></a>) – path of the mask bmp file</li>
-<li><strong>res</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – resolution of the picture mm (default 1)</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>adr_bmp</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – path of the mask bmp file</p></li>
+<li><p><strong>res</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – resolution of the picture mm (default 1)</p></li>
 </ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return mask:</th><td class="field-body"></td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Rtype mask:</th><td class="field-body"><p class="first last">mask2d</p>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+<dt class="field-even">Return mask</dt>
+<dd class="field-even"><p></p></dd>
+<dt class="field-odd">Rtype mask</dt>
+<dd class="field-odd"><p>mask2d</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="DICToolbox.image2d.micro2d">
-<em class="property">class </em><code class="descclassname">DICToolbox.image2d.</code><code class="descname">micro2d</code><span class="sig-paren">(</span><em>field</em>, <em>resolution</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#micro2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.micro2d" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">DICToolbox.image2d.</code><code class="sig-name descname">micro2d</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">resolution</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#micro2d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.micro2d" title="Permalink to this definition">¶</a></dt>
 <dd><p>micro2d is a class which herit from image2d but it is restricted to microstructure object (background 0, boundary 1)</p>
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.image2d.micro2d.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>field</em>, <em>resolution</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#micro2d.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.micro2d.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">field</span></em>, <em class="sig-param"><span class="n">resolution</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#micro2d.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.micro2d.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructor : field is a matrix and resolution is the step size in mm</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>field</strong> (<em>array</em>) – tabular of scalar data</li>
-<li><strong>resolution</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><em>float</em></a>) – step size resolution (millimeters)</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>field</strong> (<em>array</em>) – tabular of scalar data</p></li>
+<li><p><strong>resolution</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – step size resolution (millimeters)</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.image2d.micro2d.area">
-<code class="descname">area</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#micro2d.area"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.micro2d.area" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">area</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#micro2d.area"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.micro2d.area" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the grain area for each grain</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">g_arean array of scalar of grain area in mm^2</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">g_area np.array</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>g_arean array of scalar of grain area in mm^2</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>g_area np.array</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.image2d.micro2d.grain_label">
-<code class="descname">grain_label</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#micro2d.grain_label"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.micro2d.grain_label" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">grain_label</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#micro2d.grain_label"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.micro2d.grain_label" title="Permalink to this definition">¶</a></dt>
 <dd><p>Label area in a black and white picture</p>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">black color for the background and white color for the boundary</p>
+<p class="admonition-title">Note</p>
+<p>black color for the background and white color for the boundary</p>
 </div>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="DICToolbox.image2d.micro2d.plotBoundary">
-<code class="descname">plotBoundary</code><span class="sig-paren">(</span><em>dilatation=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#micro2d.plotBoundary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.micro2d.plotBoundary" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">plotBoundary</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dilatation</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/image2d.html#micro2d.plotBoundary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.image2d.micro2d.plotBoundary" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add boundary to the figure</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>dilatation</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><em>int</em></a>) – number of iteration for the dilation of 1 value - used this to make larger the boundaries (default 2)</p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Exemple:</th><td class="field-body"><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">phi1</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dilatation</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – number of iteration for the dilation of 1 value - used this to make larger the boundaries (default 2)</p>
+</dd>
+<dt class="field-even">Exemple</dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">phi1</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">micro</span><span class="o">.</span><span class="n">plotBoundary</span><span class="p">(</span><span class="n">dilatation</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">plot only the value of the pixel equal at 1</p>
+<p class="admonition-title">Note</p>
+<p>plot only the value of the pixel equal at 1</p>
 </div>
 </dd></dl>
 
@@ -628,7 +590,7 @@ The default mask is a circle of center you choose and radius you define.</p>
         <a href="sTM.html" class="btn btn-neutral float-right" title="2. symetricTensorMap" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="dic.html" class="btn btn-neutral" title="4. Function overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="dic.html" class="btn btn-neutral float-left" title="4. Function overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -654,26 +616,16 @@ The default mask is a circle of center you choose and radius you define.</p>
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

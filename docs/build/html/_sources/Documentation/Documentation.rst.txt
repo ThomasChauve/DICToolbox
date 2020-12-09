@@ -1,15 +1,14 @@
-
 This documention is made from a jupyter notebook available in
-'Exemple/Documentation.ipynb'
+‘Exemple/Documentation.ipynb’
 
 Load the data
 =============
 
 .. code:: ipython3
 
-    import DICToolbox.dic as dic
+    import DICToolbox.loadDIC as ldic
     import matplotlib.pyplot as plt
-    import matplotlib.cm as cm
+    import mawplotlib.cm as cm
     import numpy as np
     from IPython.display import Image
 
@@ -27,7 +26,14 @@ Load the data
     micro='Data/micro_10.bmp'
     
     # Create Data object
-    data=dic.dic(adr,res,time_step,adr_micro=micro)
+    data=ldic.load7D(adr,res,time_step,adr_micro=micro)
+
+
+.. parsed-literal::
+
+    /home/chauvet/anaconda3/lib/python3.7/site-packages/DICToolbox/image2d.py:588: UserWarning: The argument 'neighbors' is deprecated and will be removed in scikit-image 0.18, use 'connectivity' instead. For neighbors=4, use connectivity=1
+      new_grain = morphology.label(new_img, neighbors=4, background=1)
+
 
 Structure of the object
 -----------------------
@@ -115,12 +121,6 @@ Componante of strain tensor
 
 
 
-.. parsed-literal::
-
-    /home/chauvet/anaconda3/lib/python3.7/site-packages/numpy/core/fromnumeric.py:83: RuntimeWarning: invalid value encountered in reduce
-      return ufunc.reduce(obj, axis, dtype, out, **passkwargs)
-
-
 
 
 .. parsed-literal::
@@ -130,7 +130,7 @@ Componante of strain tensor
 
 
 
-.. image:: output_11_2.png
+.. image:: output_11_1.png
 
 
 Solid rotation
@@ -370,4 +370,7 @@ Extract macroscopic curve
 
 
 .. image:: output_34_1.png
+
+
+
 

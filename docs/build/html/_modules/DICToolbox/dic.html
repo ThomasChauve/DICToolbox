@@ -17,32 +17,35 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -169,7 +172,7 @@
 <span class="kn">import</span> <span class="nn">DICToolbox.symetricTensorMap</span> <span class="k">as</span> <span class="nn">sTM</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">skimage</span> <span class="k">import</span> <span class="n">io</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">io</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">pylab</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -185,7 +188,7 @@
     <span class="k">pass</span>
 
 
-<div class="viewcode-block" id="dic.__init__"><a class="viewcode-back" href="../../CLASS/dic.html#DICToolbox.dic.dic.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">adr_data</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">adr_micro</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="viewcode-block" id="dic.__init__"><a class="viewcode-back" href="../../CLASS/dic.html#DICToolbox.dic.dic.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">strain</span><span class="p">,</span> <span class="n">oxy</span><span class="p">,</span> <span class="n">micro</span><span class="p">,</span> <span class="n">grains</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        :param adr_data: folder path where the 7D output are store</span>
 <span class="sd">        :type adr_data: str</span>
@@ -198,62 +201,15 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         
         <span class="c1"># include time_step in the object</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="o">=</span><span class="n">time_step</span>
-                
-        <span class="c1"># find out file from 7D</span>
-        <span class="n">output</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">adr_data</span><span class="p">)</span>
-        <span class="n">output</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-        <span class="c1"># loop on all the output</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">=</span><span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">v</span><span class="o">=</span><span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">strain</span><span class="o">=</span><span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">oxy</span><span class="o">=</span><span class="p">[]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">))):</span>
-            <span class="c1"># load the file</span>
-            <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">adr_data</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">output</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="c1"># find not indexed point</span>
-            <span class="nb">id</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">4</span><span class="p">]</span><span class="o">!=</span><span class="mf">0.0</span><span class="p">)</span>
-            <span class="c1"># replace not indexed point by NaN value</span>
-            <span class="n">data</span><span class="p">[</span><span class="nb">id</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">NaN</span>
-            <span class="n">data</span><span class="p">[</span><span class="nb">id</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">NaN</span>
-            <span class="c1"># for the first step it extract size sx,sy and window correlation value used in 7D</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">):</span>
-                <span class="n">n_dic</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
-                <span class="n">nb_pix</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
-                <span class="n">sx</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">data</span><span class="p">[</span><span class="n">nb_pix</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">n_dic</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-                <span class="n">sy</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">data</span><span class="p">[</span><span class="n">nb_pix</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">n_dic</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-            <span class="c1"># Build image at time t=i</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">im2d</span><span class="o">.</span><span class="n">image2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">resolution</span><span class="p">,[</span><span class="n">sx</span><span class="p">,</span><span class="n">sy</span><span class="p">])),</span><span class="n">n_dic</span><span class="o">*</span><span class="n">resolution</span><span class="p">))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">v</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">im2d</span><span class="o">.</span><span class="n">image2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">3</span><span class="p">]</span><span class="o">*</span><span class="n">resolution</span><span class="p">,[</span><span class="n">sx</span><span class="p">,</span><span class="n">sy</span><span class="p">])),</span><span class="n">n_dic</span><span class="o">*</span><span class="n">resolution</span><span class="p">))</span>
-            <span class="n">exx</span><span class="o">=</span><span class="n">im2d</span><span class="o">.</span><span class="n">image2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">5</span><span class="p">],[</span><span class="n">sx</span><span class="p">,</span><span class="n">sy</span><span class="p">])),</span><span class="n">n_dic</span><span class="o">*</span><span class="n">resolution</span><span class="p">)</span>
-            <span class="n">eyy</span><span class="o">=</span><span class="n">im2d</span><span class="o">.</span><span class="n">image2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">6</span><span class="p">],[</span><span class="n">sx</span><span class="p">,</span><span class="n">sy</span><span class="p">])),</span><span class="n">n_dic</span><span class="o">*</span><span class="n">resolution</span><span class="p">)</span>
-            <span class="n">exy</span><span class="o">=</span><span class="n">im2d</span><span class="o">.</span><span class="n">image2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">7</span><span class="p">],[</span><span class="n">sx</span><span class="p">,</span><span class="n">sy</span><span class="p">])),</span><span class="n">n_dic</span><span class="o">*</span><span class="n">resolution</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
-                <span class="n">eaz</span><span class="o">=</span><span class="n">im2d</span><span class="o">.</span><span class="n">image2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">sy</span><span class="p">,</span><span class="n">sx</span><span class="p">]),</span><span class="n">n_dic</span><span class="o">*</span><span class="n">resolution</span><span class="p">)</span>
-                
-            <span class="bp">self</span><span class="o">.</span><span class="n">strain</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sTM</span><span class="o">.</span><span class="n">symetricTensorMap</span><span class="p">(</span><span class="n">exx</span><span class="p">,</span><span class="n">eyy</span><span class="p">,</span><span class="n">eaz</span><span class="p">,</span><span class="n">exy</span><span class="p">,</span><span class="n">eaz</span><span class="p">,</span><span class="n">eaz</span><span class="p">))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">oxy</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">))</span><span class="o">*.</span><span class="mi">5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="o">=</span><span class="n">time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="o">=</span><span class="n">u</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">v</span><span class="o">=</span><span class="n">v</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">strain</span><span class="o">=</span><span class="n">strain</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">oxy</span><span class="o">=</span><span class="n">oxy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">micro</span><span class="o">=</span><span class="n">micro</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grains</span><span class="o">=</span><span class="n">grains</span></div>
         
-        <span class="n">minx</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">n_dic</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
-        <span class="n">maxx</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="n">n_dic</span><span class="p">)</span>
-        <span class="n">miny</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="o">-</span><span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">n_dic</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
-        <span class="n">maxy</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="o">-</span><span class="n">data</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="n">n_dic</span><span class="p">)</span>
-        
-        <span class="c1"># open the microstructure</span>
-        <span class="k">if</span> <span class="n">adr_micro</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">micro</span><span class="o">=</span><span class="n">im2d</span><span class="o">.</span><span class="n">micro2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">sy</span><span class="p">,</span><span class="n">sx</span><span class="p">]),</span><span class="n">n_dic</span><span class="o">*</span><span class="n">resolution</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">micro_bmp</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">adr_micro</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">micro</span><span class="o">=</span><span class="n">im2d</span><span class="o">.</span><span class="n">micro2d</span><span class="p">(</span><span class="n">micro_bmp</span><span class="p">[</span><span class="n">miny</span><span class="p">:</span><span class="n">maxy</span><span class="p">,</span><span class="n">minx</span><span class="p">:</span><span class="n">maxx</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">micro_bmp</span><span class="p">),</span><span class="n">n_dic</span><span class="o">*</span><span class="n">resolution</span><span class="p">)</span>
-        
-        <span class="bp">self</span><span class="o">.</span><span class="n">grains</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">micro</span><span class="o">.</span><span class="n">grain_label</span><span class="p">()</span>
-        
-        <span class="c1"># replace grains boundary with NaN number</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">grains</span><span class="o">.</span><span class="n">field</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grains</span><span class="o">.</span><span class="n">field</span><span class="p">,</span><span class="nb">float</span><span class="p">)</span>
-        <span class="n">idx</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">micro</span><span class="o">.</span><span class="n">field</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">grains</span><span class="o">.</span><span class="n">field</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span></div>
-        
-<div class="viewcode-block" id="dic.crop"><a class="viewcode-back" href="../../CLASS/dic.html#DICToolbox.dic.dic.crop">[docs]</a>    <span class="k">def</span> <span class="nf">crop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="dic.crop"><a class="viewcode-back" href="../../CLASS/dic.html#DICToolbox.dic.dic.crop">[docs]</a>    <span class="k">def</span> <span class="nf">crop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmax</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ymax</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Crop function to select the area of interest</span>
 <span class="sd">        </span>
@@ -264,24 +220,26 @@
 <span class="sd">        .. note:: clic on the top left corner and bottom right corner to select the area</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         
-        <span class="c1"># plot the data</span>
-        <span class="n">h</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">strain</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">t22</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">micro</span><span class="o">.</span><span class="n">plotBoundary</span><span class="p">()</span>
-        <span class="c1"># select top left and bottom right corner for crop</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Select top left and bottom right corner for crop :&#39;</span><span class="p">)</span>
-        <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pylab</span><span class="o">.</span><span class="n">ginput</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">res</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
-        <span class="c1"># create x and Y coordinate</span>
-        
-        <span class="n">xx</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
-        <span class="n">yy</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span>
-        <span class="c1"># size of the initial map</span>
-        <span class="n">ss</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>
-        <span class="c1"># find xmin xmax ymin and ymax</span>
-        <span class="n">xmin</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">xx</span><span class="p">))</span>
-        <span class="n">xmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">xx</span><span class="p">))</span>
-        <span class="n">ymin</span><span class="o">=</span><span class="n">ss</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">yy</span><span class="p">))</span>
-        <span class="n">ymax</span><span class="o">=</span><span class="n">ss</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">yy</span><span class="p">))</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">xmin</span><span class="o">+</span><span class="n">xmax</span><span class="o">+</span><span class="n">ymin</span><span class="o">+</span><span class="n">ymax</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># plot the data</span>
+            <span class="n">h</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">strain</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">t22</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">micro</span><span class="o">.</span><span class="n">plotBoundary</span><span class="p">()</span>
+            <span class="c1"># select top left and bottom right corner for crop</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Select top left and bottom right corner for crop :&#39;</span><span class="p">)</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pylab</span><span class="o">.</span><span class="n">ginput</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">res</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+            <span class="c1"># create x and Y coordinate</span>
+
+            <span class="n">xx</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">yy</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span>
+            <span class="c1"># size of the initial map</span>
+            <span class="n">ss</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">field</span><span class="p">)</span>
+            <span class="c1"># find xmin xmax ymin and ymax</span>
+            <span class="n">xmin</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">xx</span><span class="p">)))</span>
+            <span class="n">xmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">xx</span><span class="p">)))</span>
+            <span class="n">ymin</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">(</span><span class="n">ss</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">yy</span><span class="p">)))</span>
+            <span class="n">ymax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">(</span><span class="n">ss</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">yy</span><span class="p">)))</span>
+
         
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">strain</span><span class="p">))):</span>
             <span class="c1"># crop the map</span>
@@ -311,7 +269,9 @@
         <span class="c1"># replace grains boundary with NaN number</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">grains</span><span class="o">.</span><span class="n">field</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grains</span><span class="o">.</span><span class="n">field</span><span class="p">,</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">idx</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">micro</span><span class="o">.</span><span class="n">field</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">grains</span><span class="o">.</span><span class="n">field</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grains</span><span class="o">.</span><span class="n">field</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+        
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">xmin</span><span class="p">,</span><span class="n">xmax</span><span class="p">,</span><span class="n">ymin</span><span class="p">,</span><span class="n">ymax</span><span class="p">])</span></div>
         
 <div class="viewcode-block" id="dic.strain_macro"><a class="viewcode-back" href="../../CLASS/dic.html#DICToolbox.dic.dic.strain_macro">[docs]</a>    <span class="k">def</span> <span class="nf">strain_macro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nb_line</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;</span>
@@ -443,26 +403,16 @@
   
 
 
-  
-
-    
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../../_static/jquery.js"></script>
-        <script type="text/javascript" src="../../_static/underscore.js"></script>
-        <script type="text/javascript" src="../../_static/doctools.js"></script>
-        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-
-  
-
-  <script type="text/javascript" src="../../_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>
