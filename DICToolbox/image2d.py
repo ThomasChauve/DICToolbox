@@ -585,7 +585,7 @@ class micro2d(image2d):
         # function which label a microstructure skeleton in one number per grain
         new_img=self.field
         res=self.res
-        new_grain = morphology.label(new_img, neighbors=4, background=1)
+        new_grain = morphology.label(new_img, connectivity=1, background=1)
         grains=image2d(new_grain,res)
         return grains
     
