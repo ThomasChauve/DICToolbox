@@ -232,7 +232,7 @@ class dic(object):
         
         
         
-        time = widgets.IntSlider(value=0,min=0,max=len(self.strain)-1,step=1,description="Press play",disabled=False)
+        time = widgets.IntSlider(value=0,min=0,max=len(self.strain)-1,step=1,disabled=False)
         
         play = widgets.Play(interval=4000,continuous_update=True)
         
