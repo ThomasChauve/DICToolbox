@@ -1,1 +1,1 @@
-DIC Toolbox is a python tools created to work on 2D strain field map such as the one obtained using 7D software from Pierre Vacher (Annecy). It is an open source code under GPL-v3. There is no guarantee if you are using it. It has been tested with python 3.7
+DIC Toolbox is a python tools created to work on 2D strain field map such as the one obtained using 7D software from Pierre Vacher (Annecy). It is an open source code under GPL-v3. There is no guarantee if you are using it. It has been tested with python 3.9
