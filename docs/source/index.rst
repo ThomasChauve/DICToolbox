@@ -6,7 +6,11 @@
 Welcome to DIC Toolbox's documentation!
 ========================================
 
-DIC Toolbox is a python tools created to work on 2D strain field map such as the one obtained using 7D software from Pierre Vacher (Annecy). It is an open source code under CC-BY-CC licence (https://creativecommons.org/licenses/by/2.0/fr/deed.en). There is no guarantee if you are using it. It has been tested with python 3.7
+DIC Toolbox is a python tools created to work on 2D strain field map. 
+
+It can import output from DICe and 7D. Other import function can be writen.
+
+It is an open source code under GPL-v3. There is no guarantee if you are using it. It has been tested with python 3.9
 
 
 .. toctree::

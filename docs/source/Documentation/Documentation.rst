@@ -1,6 +1,11 @@
 This documention is made from a jupyter notebook available in
 ‘Exemple/Documentation.ipynb’
 
+It can be run using binder.
+
+.. image:: https://mybinder.org/badge_logo.svg
+    :target: https://mybinder.org/v2/gh/ThomasChauve/DICToolbox/master
+
 Load the data
 =============
 
