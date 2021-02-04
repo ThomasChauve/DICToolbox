@@ -15,6 +15,7 @@ Toolbox for data obtained using 7D software create by Pierre Vacher
 import DICToolbox.image2d as im2d
 import DICToolbox.symetricTensorMap as sTM
 
+import ipywidgets as widgets
 import numpy as np
 from skimage import io
 import os
@@ -52,6 +53,200 @@ class dic(object):
         self.oxy=oxy
         self.micro=micro
         self.grains=grains
+        
+    def DICexploration(self,fsize=10):
+        '''
+        A function to explore the data set
+        '''
+        
+        def explo_plot(time,name,FCB,PMS,PAC,GBon):
+            """
+            Print the current widget value in short sentence
+            """
+            if name=="eqVonMises":
+                pdata=self.strain[time].eqVonMises()
+                cm2=cm.viridis
+                cb_min=np.nanmin(pdata.field.flatten())
+                cb_max=np.nanmax(pdata.field.flatten())
+                if FCB:
+                    for j in list(range(len(self.strain))):
+                        if np.nanmin(self.strain[j].eqVonMises().field.flatten())<cb_min:
+                            cb_min=np.nanmin(self.strain[j].eqVonMises().field.flatten())
+                        if np.nanmax(self.strain[j].eqVonMises().field.flatten())>cb_max:
+                            cb_max=np.nanmax(self.strain[j].eqVonMises().field.flatten())
+
+
+            elif name=="epsilon_xx":
+                pdata=self.strain[time].t11
+                cm2=cm.seismic        
+                cb_min=np.nanmin(pdata.field.flatten())
+                cb_max=np.nanmax(pdata.field.flatten())
+                if FCB:
+                    for j in list(range(len(self.strain))):
+                        if np.nanmin(self.strain[j].t11.field.flatten())<cb_min:
+                            cb_min=np.nanmin(self.strain[j].t11.field.flatten())
+                        if np.nanmax(self.strain[j].t11.field.flatten())>cb_max:
+                            cb_max=np.nanmax(self.strain[j].t11.field.flatten())
+
+                cb_min=-np.max(np.array([np.abs(cb_min),np.abs(cb_max)]))
+                cb_max=np.max(np.array([np.abs(cb_min),np.abs(cb_max)]))
+
+            elif name=="epsilon_yy":
+                pdata=self.strain[time].t22
+                cm2=cm.seismic
+                cb_min=np.nanmin(pdata.field.flatten())
+                cb_max=np.nanmax(pdata.field.flatten())
+                if FCB:
+                    for j in list(range(len(self.strain))):
+                        if np.nanmin(self.strain[j].t22.field.flatten())<cb_min:
+                            cb_min=np.nanmin(self.strain[j].t22.field.flatten())
+                        if np.nanmax(self.strain[j].t22.field.flatten())>cb_max:
+                            cb_max=np.nanmax(self.strain[j].t22.field.flatten())
+
+                cb_min=-np.max(np.array([np.abs(cb_min),np.abs(cb_max)]))
+                cb_max=np.max(np.array([np.abs(cb_min),np.abs(cb_max)]))
+                
+            elif name=="epsilon_xy":
+                pdata=self.strain[time].t12
+                cm2=cm.seismic
+                cb_min=np.nanmin(pdata.field.flatten())
+                cb_max=np.nanmax(pdata.field.flatten())
+                if FCB:
+                    for j in list(range(len(self.strain))):
+                        if np.nanmin(self.strain[j].t12.field.flatten())<cb_min:
+                            cb_min=np.nanmin(self.strain[j].t12.field.flatten())
+                        if np.nanmax(self.strain[j].t12.field.flatten())>cb_max:
+                            cb_max=np.nanmax(self.strain[j].t12.field.flatten())
+
+                cb_min=-np.max(np.array([np.abs(cb_min),np.abs(cb_max)]))
+                cb_max=np.max(np.array([np.abs(cb_min),np.abs(cb_max)]))
+
+
+            elif name=="displacement u":
+                pdata=self.u[time]
+                cm2=cm.seismic
+                cb_min=np.nanmin(pdata.field.flatten())
+                cb_max=np.nanmax(pdata.field.flatten())
+                if FCB:
+                    for j in list(range(len(self.u))):
+                        if np.nanmin(self.u[j].field.flatten())<cb_min:
+                            cb_min=np.nanmin(self.u[j].field.flatten())
+                        if np.nanmax(self.u[j].field.flatten())>cb_max:
+                            cb_max=np.nanmax(self.u[j].field.flatten())
+
+                
+            elif name=="displacement v":
+                pdata=self.v[time]
+                cm2=cm.seismic
+                cb_min=np.nanmin(pdata.field.flatten())
+                cb_max=np.nanmax(pdata.field.flatten())
+                if FCB:
+                    for j in list(range(len(self.v))):
+                        if np.nanmin(self.v[j].field.flatten())<cb_min:
+                            cb_min=np.nanmin(self.v[j].field.flatten())
+                        if np.nanmax(self.v[j].field.flatten())>cb_max:
+                            cb_max=np.nanmax(self.v[j].field.flatten())
+
+                
+            elif name=="omega_xy":
+                pdata=self.oxy[time]
+                cm2=cm.seismic
+                cb_min=np.nanmin(pdata.field.flatten())
+                cb_max=np.nanmax(pdata.field.flatten())
+                if FCB:
+                    for j in list(range(len(self.oxy))):
+                        if np.nanmin(self.oxy[j].field.flatten())<cb_min:
+                            cb_min=np.nanmin(self.oxy[j].field.flatten())
+                        if np.nanmax(self.oxy[j].field.flatten())>cb_max:
+                            cb_max=np.nanmax(self.oxy[j].field.flatten())
+
+                cb_min=-np.max(np.array([np.abs(cb_min),np.abs(cb_max)]))
+                cb_max=np.max(np.array([np.abs(cb_min),np.abs(cb_max)]))
+            
+
+
+
+            fig = plt.figure(figsize=(fsize+PAC*fsize,fsize+(PMS or PAC)*fsize/2),constrained_layout=True) 
+
+            if PMS==0 and PAC==0:
+                widths = [20]
+                heights = [20]
+                spec = fig.add_gridspec(ncols=1, nrows=1, width_ratios=widths,height_ratios=heights)
+
+            if PMS and PAC==0:
+                widths = [20]
+                heights = [20,5]
+                spec = fig.add_gridspec(ncols=1, nrows=2, width_ratios=widths,height_ratios=heights)
+                image_id=[1]
+
+            if PMS and PAC:
+                widths = [20,20]
+                heights = [20,5]
+                spec = fig.add_gridspec(ncols=2, nrows=2, width_ratios=widths,height_ratios=heights)
+                image_id=[2,1,3]
+
+            if PMS==0 and PAC:
+                widths = [20,20]
+                heights = [20,5]
+                spec = fig.add_gridspec(ncols=2, nrows=2, width_ratios=widths,height_ratios=heights)
+                image_id=[2,1,3]
+
+            fig.add_subplot(spec[0])
+            pdata.plot(colorbar=cm2,vmin=cb_min,vmax=cb_max)
+            if GBon:
+                self.micro.plotBoundary()
+
+
+
+            if PMS:
+                fig.add_subplot(spec[image_id[0]])
+                alltime,macro_eyy,macro_line=self.strain_macro(nb_line=3)
+                plt.plot(alltime/3600.,macro_eyy,'b',label='$<\epsilon_{yy}>$')
+                plt.plot(alltime/3600.,macro_line,'r',label='Dic-ligne')
+                plt.plot(alltime[time]/3600.,macro_eyy[time],'sb')
+                plt.plot(alltime[time]/3600.,macro_line[time],'sr')
+                plt.grid()
+                plt.legend()
+                plt.xlabel('Time (hours)')
+                plt.ylabel('Macro strain')
+
+            if PAC:
+                [res_auto,Cinf,profil,xi,cross]=pdata.auto_correlation(pad=2)
+                fig.add_subplot(spec[image_id[1]])
+                res_auto.plot(colorbar=cm.binary_r)
+
+                fig.add_subplot(spec[image_id[2]])
+                angle=np.linspace(-90,89,180)
+                plt.plot(angle,cross)
+                plt.grid()
+                plt.xlim([-90,90])
+                plt.xlabel('Angle (degre)')
+                plt.ylabel('Correlation length (mm)')
+
+        
+        name = widgets.Dropdown(value='eqVonMises', options=['eqVonMises', 'epsilon_xx', 'epsilon_yy', 'epsilon_xy','displacement u', 'displacement v','omega_xy'], description='Strain componant')
+        FCB=widgets.Checkbox(value=False,description='Fixed colorbar',disabled=False)
+        PMS=widgets.Checkbox(value=True,description='Macro Strain',disabled=False)
+        PAC=widgets.Checkbox(value=False,description='Auto Correlation function',disabled=False)
+        GBon=widgets.Checkbox(value=False,description='Plot Grain boundaries',disabled=False)
+        
+        
+        
+        time = widgets.IntSlider(value=0,min=0,max=len(self.strain)-1,step=1,description="Press play",disabled=False)
+        
+        play = widgets.Play(interval=4000,continuous_update=True)
+        
+        widgets.jslink((play, 'value'), (time, 'value'))
+
+        wplay=widgets.HBox([play,time,name])
+        woption=widgets.HBox([FCB,GBon])
+        woption2=widgets.HBox([PMS,PAC])
+        ui=widgets.VBox([wplay,woption,woption2])
+
+        out = widgets.interactive_output(explo_plot,{'time': time,'name':name,'FCB':FCB,'PMS': PMS,'PAC': PAC,'GBon': GBon})
+        display(ui, out)
+        
+        
         
     def crop(self,xmin=0,xmax=0,ymin=0,ymax=0):
         '''

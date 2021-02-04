@@ -65,14 +65,14 @@ class image2d(object):
         # size of the image2d
         ss=np.shape(self.field)
         # create image
-        img=plt.imshow(self.field,aspect='equal',extent=(0,ss[1]*self.res,0,ss[0]*self.res),cmap=colorbar,vmin=vmin,vmax=vmax)
+        plt.imshow(self.field,aspect='equal',extent=(0,ss[1]*self.res,0,ss[0]*self.res),cmap=colorbar,vmin=vmin,vmax=vmax)
         
         if colorbarcenter:
             zcolor=np.max(np.max(np.abs(self.field)))
             plt.clim(-zcolor, zcolor)
         
         # set up colorbar
-        plt.colorbar(img,orientation='vertical',aspect=4)
+        plt.colorbar()
         
     def extract_data(self,pos=[]):
         '''

@@ -8,14 +8,14 @@ Load the data
 
     import DICToolbox.loadDIC as ldic
     import matplotlib.pyplot as plt
-    import mawplotlib.cm as cm
+    import matplotlib.cm as cm
     import numpy as np
     from IPython.display import Image
 
 .. code:: ipython3
 
     # Folder where output from 7D are
-    adr='Data/7D-output/'
+    adr='Data/7D-output'
     # Resolution of the pixel. Information extracted from image used for the DIC
     res=0.0513 # mm/pixel You can chose the unity you want
     # time step between each picture
@@ -27,13 +27,6 @@ Load the data
     
     # Create Data object
     data=ldic.load7D(adr,res,time_step,adr_micro=micro)
-
-
-.. parsed-literal::
-
-    /home/chauvet/anaconda3/lib/python3.7/site-packages/DICToolbox/image2d.py:588: UserWarning: The argument 'neighbors' is deprecated and will be removed in scikit-image 0.18, use 'connectivity' instead. For neighbors=4, use connectivity=1
-      new_grain = morphology.label(new_img, neighbors=4, background=1)
-
 
 Structure of the object
 -----------------------
@@ -68,6 +61,26 @@ What are the data stored ?
 
 **time** : time
 
+Use DIC explore to see the data
+===============================
+
+.. code:: ipython3
+
+    data.DICexploration(fsize=7)
+
+
+
+.. parsed-literal::
+
+    VBox(children=(HBox(children=(Play(value=0, interval=4000), IntSlider(value=0, description='Press play', max=8…
+
+
+
+.. parsed-literal::
+
+    Output()
+
+
 Plot the data
 =============
 
@@ -100,7 +113,7 @@ Displacement
 
 
 
-.. image:: output_9_1.png
+.. image:: output_11_1.png
 
 
 Componante of strain tensor
@@ -130,7 +143,7 @@ Componante of strain tensor
 
 
 
-.. image:: output_11_1.png
+.. image:: output_13_1.png
 
 
 Solid rotation
@@ -152,7 +165,7 @@ Solid rotation
 
 
 
-.. image:: output_13_1.png
+.. image:: output_15_1.png
 
 
 Equivalent strain
@@ -177,7 +190,7 @@ VonMises equivalent strain field :
 
 
 
-.. image:: output_15_1.png
+.. image:: output_17_1.png
 
 
 .. code:: ipython3
@@ -201,7 +214,7 @@ VonMises equivalent strain field :
 
 
 
-.. image:: output_17_1.png
+.. image:: output_19_1.png
 
 
 Plot principal direction of the strain tensor
@@ -224,7 +237,7 @@ Plot principal direction of the strain tensor
 
 
 
-.. image:: output_19_1.png
+.. image:: output_21_1.png
 
 
 Autocorrelation function
@@ -246,7 +259,7 @@ Autocorrelation function
 
 
 
-.. image:: output_23_0.png
+.. image:: output_25_0.png
 
 
 Autocorrelation radius vs angle of profil
@@ -261,7 +274,7 @@ Orientation of the angle value used below
 
 
 
-.. image:: output_25_0.png
+.. image:: output_27_0.png
    :width: 200px
 
 
@@ -289,7 +302,7 @@ It shows the Autocorrelation radius function of the direction
 
 
 
-.. image:: output_27_1.png
+.. image:: output_29_1.png
 
 
 You can extract the maximum and the minimum radius and the orientation
@@ -339,7 +352,7 @@ add also the Cinf value
 
 
 
-.. image:: output_31_1.png
+.. image:: output_33_1.png
 
 
 Extract macroscopic curve
@@ -369,8 +382,5 @@ Extract macroscopic curve
 
 
 
-.. image:: output_34_1.png
-
-
-
+.. image:: output_36_1.png
 

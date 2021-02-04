@@ -1,39 +1,42 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>4. Function overview &mdash; DICToolbox 2.0 documentation</title>
+  <title>5. Function overview &mdash; DICToolbox 2.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
   
 
   
   
-  
+
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="1. image2d" href="image2d.html" />
@@ -74,6 +77,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -84,10 +88,11 @@
               <p class="caption"><span class="caption-text">Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../Documentation/Documentation.html">1. Load the data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Documentation/Documentation.html#plot-the-data">2. Plot the data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Documentation/Documentation.html#extract-macroscopic-curve">3. Extract macroscopic curve</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Function overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#module-DICToolbox.dic">4.1. dic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Documentation/Documentation.html#use-dic-explore-to-see-the-data">2. Use DIC explore to see the data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Documentation/Documentation.html#plot-the-data">3. Plot the data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Documentation/Documentation.html#extract-macroscopic-curve">4. Extract macroscopic curve</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Function overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-DICToolbox.dic">5.1. dic</a></li>
 </ul>
 </li>
 </ul>
@@ -101,6 +106,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -135,18 +141,20 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li><span class="section-number">4. </span>Function overview</li>
+      <li><span class="section-number">5. </span>Function overview</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../_sources/CLASS/dic.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -161,10 +169,10 @@
            <div itemprop="articleBody">
             
   <div class="section" id="function-overview">
-<h1><span class="section-number">4. </span>Function overview<a class="headerlink" href="#function-overview" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">5. </span>Function overview<a class="headerlink" href="#function-overview" title="Permalink to this headline">¶</a></h1>
 <p>Here we presente the function associated with the class dic</p>
 <div class="section" id="module-DICToolbox.dic">
-<span id="dic"></span><h2><span class="section-number">4.1. </span>dic<a class="headerlink" href="#module-DICToolbox.dic" title="Permalink to this headline">¶</a></h2>
+<span id="dic"></span><h2><span class="section-number">5.1. </span>dic<a class="headerlink" href="#module-DICToolbox.dic" title="Permalink to this headline">¶</a></h2>
 <p>Created on 21 août 2015</p>
 <span class="target" id="module-dic"></span><p>Toolbox for data obtained using 7D software create by Pierre Vacher
 7D software is software to perform Digital Image Correlation (DIC). This toolbox is used to analysed the data export from 7D software by using the exportation by ‘txt&gt;&gt;gdr’</p>
@@ -179,6 +187,12 @@
 <p class="admonition-title">Note</p>
 <p>this toolbox is build to work with the output from 7D using txt&gt;&gt;gdr export</p>
 </div>
+<dl class="py method">
+<dt id="DICToolbox.dic.dic.DICexploration">
+<code class="sig-name descname">DICexploration</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fsize</span><span class="o">=</span><span class="default_value">10</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/dic.html#dic.DICexploration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.dic.dic.DICexploration" title="Permalink to this definition">¶</a></dt>
+<dd><p>A function to explore the data set</p>
+</dd></dl>
+
 <dl class="py method">
 <dt id="DICToolbox.dic.dic.__init__">
 <code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time</span></em>, <em class="sig-param"><span class="n">u</span></em>, <em class="sig-param"><span class="n">v</span></em>, <em class="sig-param"><span class="n">strain</span></em>, <em class="sig-param"><span class="n">oxy</span></em>, <em class="sig-param"><span class="n">micro</span></em>, <em class="sig-param"><span class="n">grains</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/DICToolbox/dic.html#dic.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#DICToolbox.dic.dic.__init__" title="Permalink to this definition">¶</a></dt>
@@ -300,29 +314,29 @@
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="image2d.html" class="btn btn-neutral float-right" title="1. image2d" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../Documentation/Documentation.html" class="btn btn-neutral float-left" title="1. Load the data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="image2d.html" class="btn btn-neutral float-right" title="1. image2d" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../Documentation/Documentation.html" class="btn btn-neutral float-left" title="1. Load the data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright CC-BY-CC
+        &#169; Copyright CC-BY-CC.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -330,7 +344,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {

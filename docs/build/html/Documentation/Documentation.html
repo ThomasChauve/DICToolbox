@@ -1,42 +1,45 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>1. Load the data &mdash; DICToolbox 2.0 documentation</title>
   
 
   
-  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
   
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="4. Function overview" href="../CLASS/dic.html" />
+    <link rel="next" title="5. Function overview" href="../CLASS/dic.html" />
     <link rel="prev" title="Welcome to DIC Toolbox’s documentation!" href="../index.html" /> 
 </head>
 
@@ -74,6 +77,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -91,22 +95,23 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#plot-the-data">2. Plot the data</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#displacement">2.1. Displacement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#componante-of-strain-tensor">2.2. Componante of strain tensor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#solid-rotation">2.3. Solid rotation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#equivalent-strain">2.4. Equivalent strain</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#plot-principal-direction-of-the-strain-tensor">2.5. Plot principal direction of the strain tensor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#autocorrelation-function">2.6. Autocorrelation function</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">2.6.1. Autocorrelation function</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#autocorrelation-radius-vs-angle-of-profil">2.6.2. Autocorrelation radius vs angle of profil</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#autocorrelation-profil">2.6.3. Autocorrelation profil</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#use-dic-explore-to-see-the-data">2. Use DIC explore to see the data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#plot-the-data">3. Plot the data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#displacement">3.1. Displacement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#componante-of-strain-tensor">3.2. Componante of strain tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#solid-rotation">3.3. Solid rotation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#equivalent-strain">3.4. Equivalent strain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plot-principal-direction-of-the-strain-tensor">3.5. Plot principal direction of the strain tensor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#autocorrelation-function">3.6. Autocorrelation function</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">3.6.1. Autocorrelation function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#autocorrelation-radius-vs-angle-of-profil">3.6.2. Autocorrelation radius vs angle of profil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#autocorrelation-profil">3.6.3. Autocorrelation profil</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#extract-macroscopic-curve">3. Extract macroscopic curve</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../CLASS/dic.html">4. Function overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#extract-macroscopic-curve">4. Extract macroscopic curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CLASS/dic.html">5. Function overview</a></li>
 </ul>
 <p class="caption"><span class="caption-text">CLASS</span></p>
 <ul>
@@ -118,6 +123,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -152,18 +158,20 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li><span class="section-number">1. </span>Load the data</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../_sources/Documentation/Documentation.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -183,13 +191,13 @@
 <h1><span class="section-number">1. </span>Load the data<a class="headerlink" href="#load-the-data" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">DICToolbox.loadDIC</span> <span class="k">as</span> <span class="nn">ldic</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">mawplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
+<span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
 </pre></div>
 </div>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Folder where output from 7D are</span>
-<span class="n">adr</span><span class="o">=</span><span class="s1">&#39;Data/7D-output/&#39;</span>
+<span class="n">adr</span><span class="o">=</span><span class="s1">&#39;Data/7D-output&#39;</span>
 <span class="c1"># Resolution of the pixel. Information extracted from image used for the DIC</span>
 <span class="n">res</span><span class="o">=</span><span class="mf">0.0513</span> <span class="c1"># mm/pixel You can chose the unity you want</span>
 <span class="c1"># time step between each picture</span>
@@ -201,10 +209,6 @@
 
 <span class="c1"># Create Data object</span>
 <span class="n">data</span><span class="o">=</span><span class="n">ldic</span><span class="o">.</span><span class="n">load7D</span><span class="p">(</span><span class="n">adr</span><span class="p">,</span><span class="n">res</span><span class="p">,</span><span class="n">time_step</span><span class="p">,</span><span class="n">adr_micro</span><span class="o">=</span><span class="n">micro</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">chauvet</span><span class="o">/</span><span class="n">anaconda3</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">DICToolbox</span><span class="o">/</span><span class="n">image2d</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">588</span><span class="p">:</span> <span class="ne">UserWarning</span><span class="p">:</span> <span class="n">The</span> <span class="n">argument</span> <span class="s1">&#39;neighbors&#39;</span> <span class="ow">is</span> <span class="n">deprecated</span> <span class="ow">and</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="n">scikit</span><span class="o">-</span><span class="n">image</span> <span class="mf">0.18</span><span class="p">,</span> <span class="n">use</span> <span class="s1">&#39;connectivity&#39;</span> <span class="n">instead</span><span class="o">.</span> <span class="n">For</span> <span class="n">neighbors</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">use</span> <span class="n">connectivity</span><span class="o">=</span><span class="mi">1</span>
-  <span class="n">new_grain</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">new_img</span><span class="p">,</span> <span class="n">neighbors</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="section" id="structure-of-the-object">
@@ -230,14 +234,26 @@
 </div>
 </div>
 </div>
+<div class="section" id="use-dic-explore-to-see-the-data">
+<h1><span class="section-number">2. </span>Use DIC explore to see the data<a class="headerlink" href="#use-dic-explore-to-see-the-data" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">DICexploration</span><span class="p">(</span><span class="n">fsize</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>VBox(children=(HBox(children=(Play(value=0, interval=4000), IntSlider(value=0, description=&#39;Press play&#39;, max=8…
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Output</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="plot-the-data">
-<h1><span class="section-number">2. </span>Plot the data<a class="headerlink" href="#plot-the-data" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">3. </span>Plot the data<a class="headerlink" href="#plot-the-data" title="Permalink to this headline">¶</a></h1>
 <p>For the time step 5</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="o">=</span><span class="mi">5</span>
 </pre></div>
 </div>
 <div class="section" id="displacement">
-<h2><span class="section-number">2.1. </span>Displacement<a class="headerlink" href="#displacement" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.1. </span>Displacement<a class="headerlink" href="#displacement" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">data</span><span class="o">.</span><span class="n">u</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
@@ -250,10 +266,10 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;Vertical displacement : v&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/output_9_1.png" src="../_images/output_9_1.png" />
+<img alt="../_images/output_11_1.png" src="../_images/output_11_1.png" />
 </div>
 <div class="section" id="componante-of-strain-tensor">
-<h2><span class="section-number">2.2. </span>Componante of strain tensor<a class="headerlink" href="#componante-of-strain-tensor" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.2. </span>Componante of strain tensor<a class="headerlink" href="#componante-of-strain-tensor" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">data</span><span class="o">.</span><span class="n">strain</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">t11</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">colorbarcenter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorbar</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">seismic</span><span class="p">)</span>
@@ -267,20 +283,20 @@
 </pre></div>
 </div>
 <pre class="literal-block">Text(0.5, 1.0, '$\epsilon_{xy}$')</pre>
-<img alt="Documentation/output_11_1.png" src="Documentation/output_11_1.png" />
+<img alt="../_images/output_13_1.png" src="../_images/output_13_1.png" />
 </div>
 <div class="section" id="solid-rotation">
-<h2><span class="section-number">2.3. </span>Solid rotation<a class="headerlink" href="#solid-rotation" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.3. </span>Solid rotation<a class="headerlink" href="#solid-rotation" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">data</span><span class="o">.</span><span class="n">oxy</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">colorbarcenter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorbar</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">seismic</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;$\omega_</span><span class="si">{xy}</span><span class="s1">$&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <pre class="literal-block">Text(0.5, 1.0, '$\omega_{xy}$')</pre>
-<img alt="../_images/output_13_1.png" src="../_images/output_13_1.png" />
+<img alt="../_images/output_15_1.png" src="../_images/output_15_1.png" />
 </div>
 <div class="section" id="equivalent-strain">
-<h2><span class="section-number">2.4. </span>Equivalent strain<a class="headerlink" href="#equivalent-strain" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.4. </span>Equivalent strain<a class="headerlink" href="#equivalent-strain" title="Permalink to this headline">¶</a></h2>
 <p>VonMises equivalent strain field :
 <span class="math notranslate nohighlight">\(\sqrt{\frac{2}{3}\left( \varepsilon_{xx}^2+\varepsilon_{yy}^2+2.\varepsilon_{xy}^2 \right) }\)</span></p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
@@ -291,7 +307,7 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;Equivalent strain VonMises&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/output_15_1.png" src="../_images/output_15_1.png" />
+<img alt="../_images/output_17_1.png" src="../_images/output_17_1.png" />
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Add microstructure on figure</span>
 </pre></div>
 </div>
@@ -304,10 +320,10 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;Equivalent strain VonMises + Grains boundries&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/output_17_1.png" src="../_images/output_17_1.png" />
+<img alt="../_images/output_19_1.png" src="../_images/output_19_1.png" />
 </div>
 <div class="section" id="plot-principal-direction-of-the-strain-tensor">
-<h2><span class="section-number">2.5. </span>Plot principal direction of the strain tensor<a class="headerlink" href="#plot-principal-direction-of-the-strain-tensor" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.5. </span>Plot principal direction of the strain tensor<a class="headerlink" href="#plot-principal-direction-of-the-strain-tensor" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
 <span class="n">data</span><span class="o">.</span><span class="n">strain</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">principal_tensor</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">space</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">twod</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">absolutemax</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">data</span><span class="o">.</span><span class="n">micro</span><span class="o">.</span><span class="n">plotBoundary</span><span class="p">()</span>
@@ -317,29 +333,29 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">77.976</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">85.158</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/output_19_1.png" src="../_images/output_19_1.png" />
+<img alt="../_images/output_21_1.png" src="../_images/output_21_1.png" />
 </div>
 <div class="section" id="autocorrelation-function">
-<h2><span class="section-number">2.6. </span>Autocorrelation function<a class="headerlink" href="#autocorrelation-function" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.6. </span>Autocorrelation function<a class="headerlink" href="#autocorrelation-function" title="Permalink to this headline">¶</a></h2>
 <p>It shows how to do autocorrelation onequivalent strain VonMises</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">res_auto</span><span class="p">,</span><span class="n">Cinf</span><span class="p">,</span><span class="n">profil</span><span class="p">,</span><span class="n">xi</span><span class="p">,</span><span class="n">cross</span><span class="p">]</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">strain</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">eqVonMises</span><span class="p">()</span><span class="o">.</span><span class="n">auto_correlation</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="section" id="id1">
-<h3><span class="section-number">2.6.1. </span>Autocorrelation function<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">3.6.1. </span>Autocorrelation function<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
 <span class="n">res_auto</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">colorbar</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">binary_r</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/output_23_0.png" src="../_images/output_23_0.png" />
+<img alt="../_images/output_25_0.png" src="../_images/output_25_0.png" />
 </div>
 <div class="section" id="autocorrelation-radius-vs-angle-of-profil">
-<h3><span class="section-number">2.6.2. </span>Autocorrelation radius vs angle of profil<a class="headerlink" href="#autocorrelation-radius-vs-angle-of-profil" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">3.6.2. </span>Autocorrelation radius vs angle of profil<a class="headerlink" href="#autocorrelation-radius-vs-angle-of-profil" title="Permalink to this headline">¶</a></h3>
 <p>Orientation of the angle value used below</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;autocor.png&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="../_images/output_25_0.png"><img alt="../_images/output_25_0.png" src="../_images/output_25_0.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="../_images/output_27_0.png"><img alt="../_images/output_27_0.png" src="../_images/output_27_0.png" style="width: 200px;" /></a>
 <p>It shows the Autocorrelation radius function of the direction</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">angle</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="mi">89</span><span class="p">,</span><span class="mi">180</span><span class="p">)</span>
 
@@ -354,7 +370,7 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;Correlation length (mm)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/output_27_1.png" src="../_images/output_27_1.png" />
+<img alt="../_images/output_29_1.png" src="../_images/output_29_1.png" />
 <p>You can extract the maximum and the minimum radius and the orientation
 associated</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">idmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">cross</span><span class="o">==</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">cross</span><span class="p">))</span>
@@ -371,7 +387,7 @@ associated</p>
 </div>
 </div>
 <div class="section" id="autocorrelation-profil">
-<h3><span class="section-number">2.6.3. </span>Autocorrelation profil<a class="headerlink" href="#autocorrelation-profil" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">3.6.3. </span>Autocorrelation profil<a class="headerlink" href="#autocorrelation-profil" title="Permalink to this headline">¶</a></h3>
 <p>You can plot the Autocorrelation profil for each angle. Here we show for
 the minimum correlation length and the maximum correlation length. We
 add also the Cinf value</p>
@@ -388,12 +404,12 @@ add also the Cinf value</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;Correlation value&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/output_31_1.png" src="../_images/output_31_1.png" />
+<img alt="../_images/output_33_1.png" src="../_images/output_33_1.png" />
 </div>
 </div>
 </div>
 <div class="section" id="extract-macroscopic-curve">
-<h1><span class="section-number">3. </span>Extract macroscopic curve<a class="headerlink" href="#extract-macroscopic-curve" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">4. </span>Extract macroscopic curve<a class="headerlink" href="#extract-macroscopic-curve" title="Permalink to this headline">¶</a></h1>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time</span><span class="p">,</span><span class="n">macro_eyy</span><span class="p">,</span><span class="n">macro_line</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">strain_macro</span><span class="p">(</span><span class="n">nb_line</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -409,7 +425,7 @@ add also the Cinf value</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;Macro strain&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<img alt="../_images/output_34_1.png" src="../_images/output_34_1.png" />
+<img alt="../_images/output_36_1.png" src="../_images/output_36_1.png" />
 </div>
 
 
@@ -417,29 +433,29 @@ add also the Cinf value</p>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../CLASS/dic.html" class="btn btn-neutral float-right" title="4. Function overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to DIC Toolbox’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="../CLASS/dic.html" class="btn btn-neutral float-right" title="5. Function overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to DIC Toolbox’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright CC-BY-CC
+        &#169; Copyright CC-BY-CC.
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
@@ -447,7 +463,6 @@ add also the Cinf value</p>
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
