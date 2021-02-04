@@ -21,20 +21,35 @@ It is an open source code under GPL-v3. There is no guarantee if you are using i
 Installation
 ============
 
-For simple user
-***************
-
 If you want just to use the toolbox without doing any devellopement
+
+We advised to create a new python environement using conda :
+
+.. code:: bash
+    
+    conda create --name envDIC python=3.9
+    conda activate envDIC
+    
+
+You can clone the repository :
+  
+.. code:: bash
+
+    git clone https://github.com/ThomasChauve/DICToolbox
+    cd DICToolbox/
+    
+    
+After you can install the requirements using pip :
 
 .. code:: bash
 
-	pip install git+https://github.com/ThomasChauve/DICToolbox
+    pip install -r requirements.txt
+    
+And finally install the DICToolbox package
 
+.. code:: bash
 
-For develloper
-**************
-
-If you want to access the code and be able to do some modification
+	pip install .
 
 .. code:: bash
 

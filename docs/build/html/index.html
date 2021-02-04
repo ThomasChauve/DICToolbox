@@ -174,16 +174,25 @@
 </div>
 <div class="section" id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="for-simple-user">
-<h2>For simple user<a class="headerlink" href="#for-simple-user" title="Permalink to this headline">¶</a></h2>
 <p>If you want just to use the toolbox without doing any devellopement</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install git+https://github.com/ThomasChauve/DICToolbox
+<p>We advised to create a new python environement using conda :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda create --name envDIC <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.9
+conda activate envDIC
 </pre></div>
 </div>
+<p>You can clone the repository :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/ThomasChauve/DICToolbox
+<span class="nb">cd</span> DICToolbox/
+</pre></div>
 </div>
-<div class="section" id="for-develloper">
-<h2>For develloper<a class="headerlink" href="#for-develloper" title="Permalink to this headline">¶</a></h2>
-<p>If you want to access the code and be able to do some modification</p>
+<p>After you can install the requirements using pip :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -r requirements.txt
+</pre></div>
+</div>
+<p>And finally install the DICToolbox package</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install .
+</pre></div>
+</div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/ThomasChauve/DICToolbox
 <span class="nb">cd</span> DICToolbox/
 pip install .
@@ -192,7 +201,6 @@ pip install .
 <p>Then you will find all the package in python using</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">DICToolbox</span>
 </pre></div>
-</div>
 </div>
 <div class="section" id="uninstall">
 <h2>Uninstall<a class="headerlink" href="#uninstall" title="Permalink to this headline">¶</a></h2>
