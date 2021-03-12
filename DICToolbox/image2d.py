@@ -143,6 +143,7 @@ class image2d(object):
         self.res=res
         self.field=scipy.ndimage.interpolation.zoom(self.field,zoom,order=0,mode='nearest')
         
+    
     def diff(self,axis):
         '''
         Derive the image along the axis define
