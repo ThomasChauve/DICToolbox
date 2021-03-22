@@ -105,16 +105,21 @@ class symetricTensorMap(object):
     
 
 
-    def eqVonMises(self):
+    def eqVonMises(self,normByMedian=False):
         '''
         Compute the Von Mises equivalent norm of the tensor
                 
-        
+        :param normByMedian: normalized the data by the median
+        :type normByMedian: bool
         :return: Von Mises equivalent norm (2/3*eij*eij)^0.5
         :rtype: image2d
         '''
         
         eqVM=((self.t11.pow(2)+self.t22.pow(2)+(self.t12.pow(2)+self.t13.pow(2)+self.t23.pow(2))*2.)*(2./3.)).pow(1./2.)
+        
+        if normByMedian:
+            nn=float(np.nanmedian(eqVM.field.flatten()))
+            eqVM=eqVM*(1./nn)
         
         return eqVM
     

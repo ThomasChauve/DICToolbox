@@ -59,7 +59,7 @@ def load7D(adr_data, resolution, time_step, adr_micro=0):
         maxx=np.int32(np.max(data[:,0])/n_dic)
         miny=np.int32(np.min(-data[:,1])/n_dic)-1
         maxy=np.int32(np.max(-data[:,1])/n_dic)
-        
+                
         # open the microstructure
         if adr_micro==0:
             micro=im2d.micro2d(np.zeros([sy,sx]),n_dic*resolution)

@@ -42,7 +42,7 @@ class image2d(object):
         self.field=field
         self.res=resolution
         
-    def plot(self,vmin=np.NaN,vmax=np.NaN,colorbarcenter=False,colorbar=cm.jet):
+    def plot(self,vmin=np.NaN,vmax=np.NaN,colorbarcenter=False,colorbar=cm.viridis):
         '''
         plot the image2d
         
@@ -95,7 +95,7 @@ class image2d(object):
         return self.field[id[0,1],id[0,0]],id
     
     def triple_junction(self):
-        '''
+        '''norm=matplotlib.colors.LogNorm()
         Localized the triple junction
         '''
         ss=np.shape(self.field)
@@ -202,7 +202,7 @@ class image2d(object):
         'Divide self by other case by case'
         if (type(other) is image2d):
             return image2d(self.field*1/other.field,self.res)
-        elif (type(other) is float):
+        elif (type(other) in float):
             return self*1/other
     
     def pow(self, nb):
